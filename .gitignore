@@ -56,7 +56,6 @@ dkms.conf
 
 ### Database ###
 *.accdb
-*.db
 *.dbf
 *.mdb
 *.pdb
