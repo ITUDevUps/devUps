@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "minitwit-backend", "minitwit-backend.csproj", "{250C1349-EEC4-409C-9A3F-0B1189D1A32B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{250C1349-EEC4-409C-9A3F-0B1189D1A32B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{250C1349-EEC4-409C-9A3F-0B1189D1A32B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{250C1349-EEC4-409C-9A3F-0B1189D1A32B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{250C1349-EEC4-409C-9A3F-0B1189D1A32B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {549C55B2-080D-4B42-89ED-EB4A03EC5BA4}
+	EndGlobalSection
+EndGlobal
