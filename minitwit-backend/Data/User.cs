@@ -5,11 +5,11 @@ namespace minitwit_backend.Data;
 
 public partial class User
 {
-    public int UserId { get; set; }
+    public long UserId { get; set; }
 
-    public String Username { get; set; } = null!;
+    public byte[] Username { get; set; } = null!;
 
-    public String Email { get; set; } = null!;
+    public byte[] Email { get; set; } = null!;
 
-    public String PwHash { get; set; } = null!;
+    public byte[] PwHash { get; set; } = null!;
 }
