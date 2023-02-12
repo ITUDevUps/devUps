@@ -22,7 +22,10 @@ public partial class MinitwitContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlite("Data Source=./Data/minitwit.db");
+    {
+        if (!optionsBuilder.IsConfigured)
+            optionsBuilder.UseSqlite("Data Source=./Data/minitwit.db");
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
