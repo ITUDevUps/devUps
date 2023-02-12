@@ -16,12 +16,20 @@ All relevant files for the React frontend is located in the folder *minitwit-fro
 
 This project uses a [GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) approach to the branching model.
 
+This means there exist the following types of branches:
+
+- release: called *main*
+- dev: called *dev*
+- features: prefixed with issue number
+- hotfix: prefixed with "hotfix/"
+
 The *main* branch will be used to create branches for releases. These release-branches have tags with corresponding version numbers.
 
 The *dev* branch is used to integrate features. That means that a new feature is branched out from the dev-branch.
-These branches should contain the naming scheme `\issueNumber_description` where the description is so for example `001_good_name`
+These branches should contain the naming scheme "*issueNumber_description*" where the description is so for example "*001_good_name*"
 
-Hotfixes can be created
+Hotfixes are created if there are bugs that needs to be fixed quikckly. The naming scheme is prefixed with "*hotfix/*". Example for this is "*hotfix/login_page*".
+If the bug can wait it should be created as an issue and fixed in a feature branch.
 
 ### Rebasing or squashing
 
@@ -30,7 +38,11 @@ The main reason is that it remains visible in the history who did what and when.
 
 ## Which distributed development workflow will we use?
 
+A developer creates a branch for their own issue.
+In general there should only be one developer per branch to reduce merge conflicts and other issues.
+If two or more developers are working on the same are of the code they communicate internally on deadlines and distribution of work to avoid conflicts.
 
+A developer shall merge the dev branch into their branch before making a pull request towards the dev-branch.
 
 ## How do we expect contributions to look like?
 
@@ -47,12 +59,16 @@ Remember to add appropriate labels to it.
 
 If you wanna help solve a current issue please feel free to do so.
 you can use `labels` to find specific issues.
-When you are done create a pull request with the issue.
+When you are done create a pull request with the issue (see section beneath).
 
 ### Pull requests
 
-This project uses pull requests to review suggested changes to the project.
-When creating one remember to use the template in the repository to ensure relevant info is given.
+This project uses pull requests to review suggested changes to the project. Do the following steps:
+- Fill out the template to ensure relevant info is given. This help reviewers understand what are being suggested and what the purpose of the PR is.
+- Link the PR to a relevant issue
+- If there are anything that should be changed in the PR it will be requested in the form of "suggested changes" or "pull request comments".
+- As you resolve these changes mark each conversation as resolved.
+
 When a PR is merged it will highly likely be deployed within a week.
 
 ## Who is responsible for integrating/reviewing contributions?
