@@ -19,7 +19,7 @@ This project uses a [GitFlow](https://www.atlassian.com/git/tutorials/comparing-
 This means there exist the following types of branches:
 
 - release: called *main*
-- dev: called *dev*
+- development: called *dev*
 - features: prefixed with issue number
 - hotfix: prefixed with "hotfix/"
 
