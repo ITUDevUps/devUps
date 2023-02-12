@@ -1,10 +1,10 @@
 # Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
 
-version: '3.4'
+version: "3.4"
 
 services:
   minitwitbackend:
-    image: minitwit/backend
+    build: ./
     ports:
       - 5000:5000
       - 5001:5001
@@ -12,4 +12,3 @@ services:
       - ASPNETCORE_HTTP_PORT=https://+:5001
       - ASPNETCORE_URLS=http://+:5000
       - ASPNETCORE_ENVIRONMENT=Development
-      
