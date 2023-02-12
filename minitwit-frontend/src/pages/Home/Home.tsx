@@ -5,7 +5,7 @@ function Home() {
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost/3005")
+        fetch("http://localhost/3005/getMessages")
             .then((response) => response.json())
             .then((json) => {
                 console.log(json);
