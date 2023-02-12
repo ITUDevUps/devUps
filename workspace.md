@@ -2,6 +2,8 @@
 
 ## Release 2
 
+February 12th
+
 We have ended up choosing to make an ASP.net backend in C#. The frontend is made in React with Typescript.
 Our considerations have been based on choosing something that is currently widely used and with a large community. 
 
@@ -21,6 +23,8 @@ It is also in the current state a widely used programming language which ensures
 None in the group have tried to develop in this combination before but have shown interest in it.
 
 ## Release 1
+
+February 5th
 
 The files were using an outdated version of python. To ensure it would work on modern systems we updated it to be able to run for python3.
 
