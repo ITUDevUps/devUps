@@ -10,7 +10,7 @@ services:
       - 3006:3006
     environment:
       - ASPNETCORE_HTTP_PORT=https://+:3006
-      - ASPNETCORE_URLS=http://+:3000
+      - ASPNETCORE_URLS=http://+:3005
       - ASPNETCORE_ENVIRONMENT=Development
   minitwitfrontend:
     build: ./minitwit-frontend
