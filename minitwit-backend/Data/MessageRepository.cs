@@ -31,6 +31,26 @@ namespace minitwit_backend.Data
         
         }
 
+        internal async static Task<List<TwitDTO>> GetMessagesAsyncByUserName(string userName)
+        {
+            using (var db = new MinitwitContext())
+            {
+                var query =
+                    from message in db.Messages
+                    join user in db.Users on message.AuthorId equals user.UserId
+                    where user.Username == userName
+                    orderby message.MessageId
+                    select new TwitDTO
+                    {
+                        UserName = user.Username,
+                        Message = message.Text,
+                        Date = message.PubDate
+                    };
+                return query.Reverse<TwitDTO>().Take(30).ToList();
+            }
+
+        }
+
 
     }
 }
