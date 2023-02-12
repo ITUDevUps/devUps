@@ -1,3 +1,4 @@
+using System.Reflection;
 using minitwit_backend.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,7 @@ app.UseHttpsRedirection();
 
 
 app.MapGet("/GetMessages",async () => await MessageRepository.GetMessagesAsync());
+app.MapGet("/GetMessages/{userName}", async (string userName) => await MessageRepository.GetMessagesAsyncByUserName(userName));
 
 app.Run();
 
