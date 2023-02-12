@@ -5,7 +5,7 @@ export interface IMessage {
     image: string;
     userName: string;
     message: string;
-    date?: Date | string;
+    date: string;
 }
 
 function Message(props: IMessage) {
