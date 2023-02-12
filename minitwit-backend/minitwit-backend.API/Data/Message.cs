@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace minitwit_backend.Data;
+﻿namespace minitwit_backend.Data;
 
 public partial class Message
 {
