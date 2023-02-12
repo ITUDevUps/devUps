@@ -1,0 +1,31 @@
+.message-container {
+    margin: 10px;
+    padding: 10px;
+    background-color: #DBF3F1;
+    border: 1px solid #81CEC6;
+    -webkit-border-radius: 5px;
+    min-height: 48px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #000000;
+}
+
+.avatar {
+    width: 40px;
+    padding: 0 10px 0 0;
+}
+
+.username {
+    font-weight: bold;
+    margin: 0 10px 0 0;
+}
+
+.message {
+    margin: 0 10px 0 0;
+    color: #000000;
+}
+
+.date {
+    color: #888;
+}
