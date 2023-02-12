@@ -22,16 +22,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
-
-
-
 app.UseHttpsRedirection();
 app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
+app.MapGet("/GetMessages",async () =>
+{
+    using var repo = new MessageRepository(new MinitwitContext());
+    return await repo.GetMessagesAsync();
+});
+app.MapGet("/GetMessages/{userName}", async (string userName) =>
+{
+    using var repo = new MessageRepository(new MinitwitContext());
+    return await repo.GetMessagesAsyncByUserName(userName);
+});
 
-app.MapGet("/GetMessages",async () => await MessageRepository.GetMessagesAsync());
-app.MapGet("/GetMessages/{userName}", async (string userName) => await MessageRepository.GetMessagesAsyncByUserName(userName));
 
 app.Run();
-
