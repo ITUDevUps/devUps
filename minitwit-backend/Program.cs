@@ -1,3 +1,4 @@
+using System.Reflection;
 using minitwit_backend.Data;
 
 var builder = WebApplication.CreateBuilder(args);
