@@ -6,11 +6,11 @@ services:
   minitwitbackend:
     build: ./minitwit-backend
     ports:
-      - 5000:5000
-      - 5001:5001
+      - 3005:3005
+      - 3006:3006
     environment:
-      - ASPNETCORE_HTTP_PORT=https://+:5001
-      - ASPNETCORE_URLS=http://+:5000
+      - ASPNETCORE_HTTP_PORT=https://+:3006
+      - ASPNETCORE_URLS=http://+:3000
       - ASPNETCORE_ENVIRONMENT=Development
   minitwitfrontend:
     build: ./minitwit-frontend
