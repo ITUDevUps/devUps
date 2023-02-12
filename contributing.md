@@ -40,7 +40,7 @@ The main reason is that it remains visible in the history who did what and when.
 
 A developer creates a branch for their own issue.
 In general there should only be one developer per branch to reduce merge conflicts and other issues.
-If two or more developers are working on the same are of the code they communicate internally on deadlines and distribution of work to avoid conflicts.
+If two or more developers are working on the same area of the code they communicate internally on deadlines and distribution of work to avoid conflicts.
 
 A developer shall merge the dev branch into their branch before making a pull request towards the dev-branch.
 
