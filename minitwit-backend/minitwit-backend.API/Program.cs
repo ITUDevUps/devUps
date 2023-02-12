@@ -1,3 +1,4 @@
+using System.Reflection;
 using minitwit_backend.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEntityFrameworkSqlite().AddDbContext<MinitwitContext>();
+
+
+builder.Services.AddCors();
+
 
 var app = builder.Build();
 
@@ -18,6 +23,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
 app.MapGet("/GetMessages",async () =>
 {
