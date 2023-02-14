@@ -17,7 +17,7 @@ git clone https://github.com/TikoyX/devUps.git
 ```
 From the directory, then run the follwing command with Docker running. 
 
-```Git Bash
+```shell
 docker-compose up
 ```
 A port for frontend and backend should appear. Try open port 3000 on local to see
