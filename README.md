@@ -12,7 +12,7 @@ the process of being reworked to a C#/React web-application. This project is par
 You need Docker installed for this project. To install this look at [Docker](https://www.docker.com).
 After ensuring Docker is installed clone the repository:
 
-```Git Bash
+```shell
 git clone https://github.com/TikoyX/devUps.git
 ```
 From the directory, then run the follwing command with Docker running. 
