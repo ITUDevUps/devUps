@@ -9,7 +9,8 @@ the process of being reworked to a C#/React web-application. This project is par
 
 ## Installation on Windows/Linux/macOS
 
-Assuming you have Git Bash and Docker. Run the follwing in Git Bash or other preferred shell. 
+You need Docker installed for this project. To install this look at [Docker](https://www.docker.com).
+After ensuring Docker is installed clone the repository:
 
 ```Git Bash
 git clone https://github.com/TikoyX/devUps.git
