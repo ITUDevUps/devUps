@@ -1,6 +1,6 @@
 # MiniTwit
 
-MiniTwit is a dashboard/blogging platoform where users can make posts. Originally made in Python, it is currently in 
+MiniTwit is a dashboard/blogging platform where users can make posts. Originally made in Python with Flask, it is currently in 
 the process of being reworked to a C#/React web-application. This project is part of the course DevOps at IT-Univeristy of Copenhagen, 2023. 
 
 
