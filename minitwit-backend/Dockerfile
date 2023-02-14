@@ -11,10 +11,6 @@ WORKDIR "/src/."
 RUN dotnet restore "minitwit-backend.API\minitwit-backend.API.csproj" 
 RUN dotnet build "minitwit-backend.API\minitwit-backend.API.csproj" -c Release -o /app
 
-
-
-
-
 FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal
 WORKDIR /app
 COPY --from=build /app .
@@ -23,4 +19,4 @@ COPY --from=build /app .
 COPY ./minitwit-backend.API/Data/minitwit.db/ /app/Data/
 EXPOSE 3005
 EXPOSE 3006
-ENTRYPOINT ["dotnet", "minitwit-backend.dll"]
+ENTRYPOINT ["dotnet", "minitwit-backend.API.dll"]
