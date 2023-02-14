@@ -9,7 +9,7 @@ the process of being reworked to a C#/React web-application. This project is par
 
 ## Installation on Windows/Linux/macOS
 
-Assuming you have Git Bash and Docker. Run the follwing in Git Bash. 
+Assuming you have Git Bash and Docker. Run the follwing in Git Bash or other preferred shell. 
 
 ```Git Bash
 git clone https://github.com/TikoyX/devUps.git
