@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import Message, {IMessage} from "../../components/message/Message";
 import "./Home.css";
+import Login from "../Login/Login";
+import Register from "../Register/Register";
 function Home() {
 
     const [messages, setMessages] = useState([]);
@@ -22,9 +24,11 @@ function Home() {
                 </div>
                 <div className="navigation">
                     <a className="nav-link" href="/">Public Timeline</a> |
-                    <a className="nav-link" href="/login">Sign Up</a> |
-                    <a className="nav-link" href="/sign_up">Sign In</a>
+                    <a className="nav-link" href="/login">Login</a> |
+                    <a className="nav-link" href="/sign_up">Sign up</a>
                 </div>
+                < Login/>
+                < Register/>
                 <div className="timeline">
                     {messages ? messages.map((message: IMessage, index) => (
                         <Message
