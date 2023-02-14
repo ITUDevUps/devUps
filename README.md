@@ -12,7 +12,7 @@ the process of being reworked to a C#/React web-application. This project is par
 Assuming you have Git Bash and Docker. Run the follwing in Git Bash. 
 
 ```Git Bash
-https://github.com/TikoyX/devUps.git
+git clone https://github.com/TikoyX/devUps.git
 ```
 From the directory, then run the follwing command with Docker running. 
 
