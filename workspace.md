@@ -1,11 +1,21 @@
 # Workspace notes
 
+## Release 3
+
+February 14th
+
+### Docker
+
+The main argument for choosing docker for our group is that we have close to no experience with it. It was introduced during the lectures and requires both knowledge and hard work to bend it to do exactly as we want.
+
+Furthermore it's a technology that is being mentioned a lot around ITU, but not used so much in courses (other than recently in BDSA on the Bachelor level).
+
 ## Release 2
 
 February 12th
 
 We have ended up choosing to make an ASP.net backend in C#. The frontend is made in React with Typescript.
-Our considerations have been based on choosing something that is currently widely used and with a large community. 
+Our considerations have been based on choosing something that is currently widely used and with a large community (meaning a lot of resources to help).
 
 ### Backend
 
