@@ -28,7 +28,7 @@ the application.
 
 ## Usage
 
-To have an active development environment, we suggest running the frontend directoiry with "npm start" and downloading 
+To have an active development environment, run the following command inside the *minitwit-frontend* directory `npm start`.
 
 ## Contributing
 
