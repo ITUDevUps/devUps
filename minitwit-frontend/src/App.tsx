@@ -1,28 +1,18 @@
 import React from 'react';
 import './App.css';
-import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
+import {Link, Outlet} from "react-router-dom";
 
 function App() {
-
-    const showHome = window.location.pathname === "/";
-    const showLogin = window.location.pathname === "/login";
-    const showRegister = window.location.pathname === "/sign-up";
-
     return (
         <div className="App">
             <header className="App-header">
                 <h1>MiniTwit</h1>
                 <div className="navigation">
-                    <a className="nav-link" href="/">Public Timeline</a> |
-                    <a className="nav-link" href="/login">Login</a> |
-                    <a className="nav-link" href="/sign-up">Sign up</a>
+                    <Link className="nav-link" to="/">Public Timeline</Link> |
+                    <Link className="nav-link" to="/login">Login</Link> |
+                    <Link className="nav-link" to="/sign-up">Sign up</Link>
                 </div>
-                {showHome ? <Home/> : undefined}
-                {showLogin ? <Login/> : undefined}
-                {showRegister ? <Register/> : undefined}
-
+                <Outlet/>
             </header>
         </div>
     );
