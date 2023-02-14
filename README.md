@@ -30,8 +30,6 @@ the application.
 To have an active development environment, we suggest running the frontend directoiry with "npm start" and downloading 
 the proper extensions for any development. 
 
-There is a possibilty with CORS-issues for some users. We recommend adding a 'Cors Changer'-extension to the browser in this case. 
-
 ## Contributing
 
 For contribution guidelines, see contributing.md. 
