@@ -33,7 +33,7 @@ the proper extensions for any development.
 
 ## Contributing
 
-For contribution guidelines, see contributing.md. 
+For contribution guidelines, see [contributing.md](contributing.md). 
 
 ## Project origin
 
