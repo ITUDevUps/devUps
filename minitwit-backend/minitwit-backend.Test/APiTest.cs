@@ -1,5 +1,4 @@
 using Xunit;
-using minitwit_backend.Data;
 
 namespace minitwit_backend.Test
 {

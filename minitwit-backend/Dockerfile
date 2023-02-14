@@ -23,4 +23,4 @@ COPY --from=build /app .
 COPY ./minitwit-backend.API/Data/minitwit.db/ /app/Data/
 EXPOSE 3005
 EXPOSE 3006
-ENTRYPOINT ["dotnet", "minitwit-backend.dll"]
+ENTRYPOINT ["dotnet", "minitwit-backend.API.dll"]
