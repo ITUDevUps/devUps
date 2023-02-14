@@ -34,9 +34,7 @@ There is a possibilty with CORS-issues for some users. We recommend adding a 'Co
 
 ## Contributing
 
-Pull requests/Changes are to be approved by members of the group only. 
-
-Please make sure to update tests and have them cover added functionalty.
+For contribution guidelines, see contributing.md. 
 
 ## Project origin
 
