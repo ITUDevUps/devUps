@@ -10,35 +10,37 @@ namespace minitwit_backend.Data
             _context = context;
         }
 
-        internal async Task<List<TwitDTO>> GetMessagesAsync()
+        internal  Task<List<TwitDTO>> GetMessagesAsync()
         {
-            var query =
-                from message in _context.Messages
-                join user in _context.Users on message.AuthorId equals user.UserId
-                orderby message.MessageId
-                select new TwitDTO
-                {
-                    UserName = user.Username,
-                    Message = message.Text,
-                    Date = message.PubDate
-                };
-            return query.Reverse<TwitDTO>().Take(30).ToList();
+            return _context.Messages
+                .Join(
+                    _context.Users,
+                    messages => messages.AuthorId,
+                    users => users.UserId,
+                    (message, user) => new TwitDTO
+                    {
+                        UserName = user.Username,
+                        Message = message.Text,
+                        Date = message.PubDate
+                    }).ToListAsync();
         }
 
-        internal async Task<List<TwitDTO>> GetMessagesAsyncByUserName(string userName)
+        internal Task<List<TwitDTO>> GetMessagesAsyncByUserName(string userName)
         {
-            var query =
-                from message in _context.Messages
-                join user in _context.Users on message.AuthorId equals user.UserId
-                where user.Username == userName
-                orderby message.MessageId
-                select new TwitDTO
+            return _context.Messages
+                .OrderBy(x => x.MessageId)
+                .Join(
+                _context.Users,
+                messages => messages.AuthorId,
+                users => users.UserId,
+                (message, user) => new TwitDTO
                 {
                     UserName = user.Username,
                     Message = message.Text,
                     Date = message.PubDate
-                };
-            return query.Reverse<TwitDTO>().Take(30).ToList();
+                })
+                .Where(x => x.UserName.Equals(userName))
+                .ToListAsync();
         }
 
         public void Dispose()
