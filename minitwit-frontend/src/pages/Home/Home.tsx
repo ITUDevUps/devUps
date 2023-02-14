@@ -7,10 +7,13 @@ function Home() {
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:3005/getMessages")
+        fetch("http://localhost:3005/getMessages", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            mode: "cors",
+        })
             .then((response) => response.json())
             .then((json) => {
-                console.log(json);
                 setMessages(json);
             })
     }, [])
