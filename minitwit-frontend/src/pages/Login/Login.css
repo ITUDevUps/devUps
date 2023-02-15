@@ -13,4 +13,11 @@
     margin: 15px 0 5px;
     padding: 10px;
     font: bold 16px Arial;
+    border-radius: 5px;
+    -webkit-appearance: button;
+}
+
+.login-label {
+    font-size: 15px;
+    text-align: left;
 }

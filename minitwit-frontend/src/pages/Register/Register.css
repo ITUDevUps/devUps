@@ -4,7 +4,7 @@
 }
 
 .register-input {
-    margin: 5px 0 15px;
+    margin: 5px 0 20px;
     padding: 10px;
     border-radius: 5px;
 }
@@ -13,4 +13,11 @@
     margin: 15px 0 5px;
     padding: 10px;
     font: bold 16px Arial;
+    border-radius: 5px;
+    -webkit-appearance: button;
+}
+
+.register-label {
+    font-size: 15px;
+    text-align: left;
 }
