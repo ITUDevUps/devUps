@@ -21,3 +21,8 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.App-footer {
+  padding: 15px 0;
+  color: #61dafb;
+}

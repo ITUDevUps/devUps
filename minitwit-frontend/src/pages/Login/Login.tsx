@@ -6,10 +6,22 @@ function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const handleSubmit= (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        fetch("http://localhost:3005/getMessages",
+            {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                mode: "cors",
+                body: JSON.stringify({username, password})
+            })
+    }
+
     return (
         <div>
             <h2>Login</h2>
-            <form className="login-form-container">
+            <form className="login-form-container" method="post" onSubmit={handleSubmit}>
                 <label htmlFor="username" className="login-label">
                     Username
                 </label>

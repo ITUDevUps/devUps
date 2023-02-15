@@ -14,6 +14,9 @@ function App() {
                 </div>
                 <Outlet/>
             </header>
+            <footer className="App-footer">
+                <p>MiniTwit - A DevUps Application</p>
+            </footer>
         </div>
     );
 }
