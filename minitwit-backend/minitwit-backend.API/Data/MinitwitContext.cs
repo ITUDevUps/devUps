@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using minitwit_backend.Data.Model;
 
 namespace minitwit_backend.Data;
 

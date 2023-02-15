@@ -1,4 +1,4 @@
-﻿namespace minitwit_backend.Data;
+﻿namespace minitwit_backend.Data.Model;
 
 public partial class Message
 {
@@ -6,7 +6,7 @@ public partial class Message
 
     public int AuthorId { get; set; }
 
-    public String Text { get; set; } = String.Empty;
+    public string Text { get; set; } = string.Empty;
 
     public int? PubDate { get; set; }
 

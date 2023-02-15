@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using minitwit_backend.Data;
+using minitwit_backend.Data.Model;
 
 namespace minitwit_backend.Test
 {

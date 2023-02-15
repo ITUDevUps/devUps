@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using minitwit_backend.Data.Model;
 
 namespace minitwit_backend.Data
 {
