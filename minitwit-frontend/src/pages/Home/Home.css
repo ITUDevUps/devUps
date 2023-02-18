@@ -15,6 +15,36 @@
     margin: 0 10px;
 }
 
+.post-message-form {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+}
+
+.post-message-input {
+    height: 10vh;
+    margin: 5px 0 20px;
+    padding: 10px;
+    border-radius: 5px;
+    resize:none;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.post-message-submit {
+    margin-top: -59px;
+    margin-left: 383px;
+    width: 70px;
+    padding: 10px;
+    font: bold 16px Arial;
+    border: none;
+    -webkit-appearance: button;
+    cursor: pointer;
+    background: rgb(136, 136, 136, 0.2);
+    border-radius: 5px;
+}
+
 .timeline {
     width: 60%;
 }
