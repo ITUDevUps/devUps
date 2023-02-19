@@ -2,6 +2,6 @@
 
 public interface IFollowerRepository : IDisposable
 {
-    public void UnFollow(int fromId, int toId);
-    public void Follow(int fromId, int toId);
+    public Task UnFollow(int fromId, int toId);
+    public Task Follow(int fromId, int toId);
 }

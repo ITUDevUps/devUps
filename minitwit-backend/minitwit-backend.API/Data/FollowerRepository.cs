@@ -11,7 +11,7 @@ namespace minitwit_backend.Data
             _context = context;
         }
 
-        public async void Follow(int fromId, int toId)
+        public async Task Follow(int fromId, int toId)
         {
             await _context.AddAsync(new Follower
             {
@@ -22,9 +22,14 @@ namespace minitwit_backend.Data
             await _context.SaveChangesAsync();
         }
 
-        public async void UnFollow(int fromId, int toId)
+        public async Task UnFollow(int fromId, int toId)
         {
-            throw new NotImplementedException("Not implemented");
+            _context.Followers.Remove(new Follower
+            {
+                WhoId = fromId,
+                WhomId = toId
+            });
+            await _context.SaveChangesAsync();
         }
 
         public void Dispose()

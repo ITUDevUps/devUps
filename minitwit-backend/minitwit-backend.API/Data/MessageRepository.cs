@@ -44,6 +44,20 @@ namespace minitwit_backend.Data
                 .ToListAsync();
         }
 
+        public async Task PostMessage(TwitDTO tweet, int authorId)
+        {
+            var latestMessageId = _context.Messages.Max(x => x.MessageId);
+
+            await _context.AddAsync(new Message
+            {
+                AuthorId = authorId,
+                PubDate = tweet.Date,
+                Text = tweet.Message,
+                MessageId = latestMessageId + 1
+            });
+            await _context.SaveChangesAsync();
+        }
+
         public void Dispose()
         {
             _context.Dispose();

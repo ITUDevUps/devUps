@@ -1,4 +1,5 @@
-﻿using minitwit_backend.Data.Model;
+﻿using System.Data.Entity;
+using minitwit_backend.Data.Model;
 
 namespace minitwit_backend.Data
 {
@@ -15,20 +16,21 @@ namespace minitwit_backend.Data
         {
             var user = _context.Users.FirstOrDefault(x => x.Username.Equals(username));
 
+            id = -1;
+
             if (user != null)
             {
                 id = user.UserId;
             }
 
-            id = -1;
             return id != -1;
         }
 
-        public async void RegisterUser(ApiSimUser apiSimUser)
+        public async Task RegisterUser(ApiSimUser apiSimUser)
         {
             var latestUserId = _context.Users.Max(x => x.UserId);
 
-            _context.Add(new User
+            await _context.AddAsync(new User
             {
                 Email = apiSimUser.Email!,
                 UserId = latestUserId + 1,

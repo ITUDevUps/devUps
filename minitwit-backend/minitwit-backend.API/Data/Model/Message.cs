@@ -10,5 +10,5 @@ public partial class Message
 
     public int? PubDate { get; set; }
 
-    public int? Flagged { get; set; }
+    public int? Flagged { get; set; } = 0;
 }

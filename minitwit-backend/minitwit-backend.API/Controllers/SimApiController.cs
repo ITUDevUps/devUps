@@ -8,17 +8,20 @@ namespace minitwit_backend.Controllers;
 [ApiController]
 public class SimApiController : ControllerBase
 {
+
+    private readonly IMessageRepository _messageRepository;
     private readonly IUserRepository _userRepository;
     private readonly IFollowerRepository _followerRepository;
 
-    public SimApiController(IUserRepository userRepository, IFollowerRepository followerRepository)
+    public SimApiController(IUserRepository userRepository, IFollowerRepository followerRepository, IMessageRepository messageRepository)
     {
         _userRepository = userRepository;
         _followerRepository = followerRepository;
+        _messageRepository = messageRepository;
     }
 
     [HttpPost("register")]
-    public IActionResult RegisterUser(ApiSimUser user)
+    public async Task<IActionResult> RegisterUser(ApiSimUser user)
     {
         var error = string.Empty;
         try
@@ -34,10 +37,11 @@ public class SimApiController : ControllerBase
             else if (String.IsNullOrEmpty(user.Password))
             {
                 error = "You have to enter a password";
-            } //also needs to check if username exists
+            }
             else
             {
-                _userRepository.RegisterUser(user);
+                if (!_userRepository.TryGetUserId(user.UserName, out _))
+                    await _userRepository.RegisterUser(user);
             }
         }
         catch (Exception e)
@@ -53,7 +57,7 @@ public class SimApiController : ControllerBase
     }
 
     [HttpPost("fllws/{username}")]
-    public IActionResult FollowUser(string username, ApiSimFollow follow)
+    public async Task<IActionResult> FollowUser(string username, ApiSimFollow follow)
     {
         try
         {
@@ -69,7 +73,7 @@ public class SimApiController : ControllerBase
                     return NotFound(follow.UnFollow);
                 }
 
-                _followerRepository.Follow(userId, followId);
+                await _followerRepository.Follow(userId, followId);
             }
             else if (!string.IsNullOrEmpty(follow.UnFollow))
             {
@@ -78,12 +82,44 @@ public class SimApiController : ControllerBase
                     return NotFound(follow.UnFollow);
                 }
 
-                _followerRepository.Follow(userId, unFollowId);
+                await _followerRepository.Follow(userId, unFollowId);
             }
         }
         catch (Exception e)
         {
-            return NotFound(e);
+            return NotFound(e.Message);
+        }
+        return NoContent();
+    }
+
+    [HttpPost("msgs/{username}")]
+    public async Task<IActionResult> Tweet(string username, ApiSimTweet tweet)
+    {
+        var error = string.Empty;
+        try
+        {
+            if (_userRepository.TryGetUserId(username, out var userid))
+            {
+                await _messageRepository.PostMessage(new TwitDTO
+                {
+                    UserName = username,
+                    Date = (int)DateTime.UtcNow.Ticks,
+                    Message = tweet.Content ?? string.Empty
+                }, userid);
+            }
+            else
+            {
+                error = "user does not exist";
+            }
+        }
+        catch (Exception e)
+        {
+            error = e.Message;
+        }
+
+        if (error != string.Empty)
+        {
+            return BadRequest(error);
         }
         return NoContent();
     }
