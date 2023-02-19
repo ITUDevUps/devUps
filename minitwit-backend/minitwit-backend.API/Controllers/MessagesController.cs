@@ -14,8 +14,7 @@ public class MessagesController : ControllerBase
         _repo = repo;
     }
 
-    [Route("GetMessages")]
-    [HttpGet]
+    [HttpGet("GetMessages")]
     public async Task<ActionResult<List<TwitDTO>>> GetMessages()
     {
         return await _repo.GetMessagesAsync();

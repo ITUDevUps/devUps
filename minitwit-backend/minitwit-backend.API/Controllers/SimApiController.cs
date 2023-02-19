@@ -4,17 +4,15 @@ using minitwit_backend.Data.Model;
 
 namespace minitwit_backend.Controllers;
 
-[Route("api-sim")]
+[Route("sim-api")]
 [ApiController]
 public class SimApiController : ControllerBase
 {
-    private readonly IMessageRepository _messageRepo;
     private readonly IUserRepository _userRepository;
     private readonly IFollowerRepository _followerRepository;
 
-    public SimApiController(IMessageRepository messageRepo, IUserRepository userRepository, IFollowerRepository followerRepository)
+    public SimApiController(IUserRepository userRepository, IFollowerRepository followerRepository)
     {
-        _messageRepo = messageRepo;
         _userRepository = userRepository;
         _followerRepository = followerRepository;
     }
@@ -48,54 +46,45 @@ public class SimApiController : ControllerBase
         }
         if (error != string.Empty)
         {
-            return new BadRequestResult();
+            return BadRequest(error);
         }
 
-        return new NoContentResult();
+        return NoContent();
     }
 
-    public static WebApplication SimApiEndpoint(WebApplication app)
+    [HttpPost("fllws/{username}")]
+    public IActionResult FollowUser(string username, ApiSimFollow follow)
     {
-        app.MapPost("/api-sim/fllws/{username}", (string username, ApiSimFollow follow) =>
+        try
         {
-            try
+            if (!_userRepository.TryGetUserId(username, out var userId))
             {
-                var context = new MinitwitContext();
-
-                using var userRepo = new UserRepository(context);
-
-                if (!userRepo.TryGetUserId(username, out var userId))
-                {
-                    return Results.NotFound(username);
-                }
-
-                if (!string.IsNullOrEmpty(follow.Follow))
-                {
-                    if (!userRepo.TryGetUserId(follow.Follow, out var followId))
-                    {
-                        return Results.NotFound(follow.UnFollow);
-                    }
-
-                    using var followerRepo = new FollowerRepository(context);
-                    followerRepo.Follow(userId, followId);
-                }
-                else if (!string.IsNullOrEmpty(follow.UnFollow))
-                {
-                    if (!userRepo.TryGetUserId(follow.UnFollow, out var unFollowId))
-                    {
-                        return Results.NotFound(follow.UnFollow);
-                    }
-
-                    using var followerRepo = new FollowerRepository(context);
-                    followerRepo.Follow(userId, unFollowId);
-                }
+                return NotFound(username);
             }
-            catch (Exception e)
+
+            if (!string.IsNullOrEmpty(follow.Follow))
             {
-                return Results.NotFound(e);
+                if (!_userRepository.TryGetUserId(follow.Follow, out var followId))
+                {
+                    return NotFound(follow.UnFollow);
+                }
+
+                _followerRepository.Follow(userId, followId);
             }
-            return Results.NoContent();
-        });
-        return app;
+            else if (!string.IsNullOrEmpty(follow.UnFollow))
+            {
+                if (!_userRepository.TryGetUserId(follow.UnFollow, out var unFollowId))
+                {
+                    return NotFound(follow.UnFollow);
+                }
+
+                _followerRepository.Follow(userId, unFollowId);
+            }
+        }
+        catch (Exception e)
+        {
+            return NotFound(e);
+        }
+        return NoContent();
     }
 }
