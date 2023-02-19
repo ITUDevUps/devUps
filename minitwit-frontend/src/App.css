@@ -1,34 +1,55 @@
 .App {
-  background-color: #282c34;
+    background-color: #282c34;
 }
 
 .navigation {
-  display: flex;
-  justify-content: space-between;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  background-color: #282c34;
-  padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: #282c34;
+    padding: 20px;
 }
 
 .nav-link {
-  color: #61dafb;
-  margin: 0 20px;
+    color: #61dafb;
+    margin: 0 20px;
+}
+
+.left-side-nav {
+    display: flex;
+    align-items: center;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  padding: 40px 0 0 0;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    padding: 40px 0 0 0;
 }
 
 .App-footer {
-  padding: 15px 0;
-  color: #61dafb;
+    padding: 15px;
+    color: #61dafb;
 }
+
+.search-icon {
+    fill: #61dafb;
+    height: 1em;
+    cursor: pointer;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    height: 22px;
+}
+
