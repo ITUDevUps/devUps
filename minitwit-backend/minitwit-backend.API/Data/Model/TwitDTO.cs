@@ -1,6 +1,4 @@
-﻿using System.Security.Policy;
-
-namespace minitwit_backend.Data
+﻿namespace minitwit_backend.Data.Model
 {
     public class TwitDTO
     {
