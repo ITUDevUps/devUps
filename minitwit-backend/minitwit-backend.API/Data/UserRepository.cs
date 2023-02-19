@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using minitwit_backend.Data.Model;
+﻿using minitwit_backend.Data.Model;
 
 namespace minitwit_backend.Data
 {
-    public class UserRepository : IDisposable
+    public class UserRepository : IUserRepository
     {
         private MinitwitContext _context;
 

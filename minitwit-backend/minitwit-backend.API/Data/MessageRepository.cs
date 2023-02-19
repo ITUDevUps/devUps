@@ -3,7 +3,7 @@ using minitwit_backend.Data.Model;
 
 namespace minitwit_backend.Data
 {
-    internal class MessageRepository : IDisposable
+    public class MessageRepository : IMessageRepository
     {
         private MinitwitContext _context;
 
@@ -11,7 +11,7 @@ namespace minitwit_backend.Data
             _context = context;
         }
 
-        internal  Task<List<TwitDTO>> GetMessagesAsync()
+        public Task<List<TwitDTO>> GetMessagesAsync()
         {
             return _context.Messages
                 .Join(
@@ -26,7 +26,7 @@ namespace minitwit_backend.Data
                     }).ToListAsync();
         }
 
-        internal Task<List<TwitDTO>> GetMessagesAsyncByUserName(string userName)
+        public Task<List<TwitDTO>> GetMessagesAsyncByUserName(string userName)
         {
             return _context.Messages
                 .OrderBy(x => x.MessageId)

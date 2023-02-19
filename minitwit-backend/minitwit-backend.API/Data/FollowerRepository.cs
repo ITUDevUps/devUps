@@ -2,7 +2,7 @@
 
 namespace minitwit_backend.Data
 {
-    public class FollowerRepository : IDisposable
+    public class FollowerRepository : IFollowerRepository
     {
         private MinitwitContext _context;
 
