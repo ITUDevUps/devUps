@@ -6,35 +6,25 @@
     padding: 20px 0 100px;
 }
 
-.navigation {
-    margin: 0 0 20px;
-}
-
-.nav-link {
-    color: #61dafb;
-    margin: 0 10px;
-}
-
 .post-message-form {
-    display: flex;
-    flex-direction: column;
     width: 30vw;
+    margin: 0 0 20px;
+    position: relative;
+    min-width: 220px;
 }
 
 .post-message-input {
     height: 10vh;
-    margin: 5px 0 20px;
     padding: 10px;
     border-radius: 5px;
     resize:none;
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
     appearance: textfield;
+    width: 100%;
 }
 
 .post-message-submit {
-    margin-top: -59px;
-    margin-left: 383px;
     width: 70px;
     padding: 10px;
     font: bold 16px Arial;
@@ -43,10 +33,18 @@
     cursor: pointer;
     background: rgb(136, 136, 136, 0.2);
     border-radius: 5px;
+    position: absolute;
+    bottom: 0;
+    right: -22px;
+}
+
+.post-message-submit:hover {
+    background: rgb(136, 136, 136, 0.4);
 }
 
 .timeline {
     width: 60%;
+    min-width: 270px;
 }
 
 .no-message-headline {

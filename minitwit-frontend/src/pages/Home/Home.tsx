@@ -5,6 +5,7 @@ import "./Home.css";
 function Home() {
 
     const [messages, setMessages] = useState([]);
+    const [twit, setTwit] = useState("");
 
     useEffect(() => {
         fetch("http://localhost:3005/getMessages", {
@@ -23,10 +24,9 @@ function Home() {
         <div className="home-container">
             <div>
                 <form className="post-message-form">
-                    <textarea id="message" className="post-message-input" name="message" placeholder="What's on your mind?" required/>
+                    <textarea id="message" className="post-message-input" name="message" value={twit} onChange={e => setTwit(e.target.value)} placeholder="What's on your mind?" required/>
                     <input className="post-message-submit" type="submit" value="Post"/>
                 </form>
-
             </div>
             <div className="timeline">
                 {messages.length !== 0 ? messages.map((message: IMessage, index) => (
