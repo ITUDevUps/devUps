@@ -16,7 +16,7 @@ function Timeline() {
 
     const fetchMessages = () => {
         setLoading(true);
-        fetch("http://localhost:3005/getMessages", {
+        fetch("http://157.245.27.152:3005/getMessages", {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             mode: "cors",
