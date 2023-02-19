@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using minitwit_backend.Data.Model;
 
 namespace minitwit_backend.Data
 {
-    internal class MessageRepository : IDisposable
+    public class MessageRepository : IMessageRepository
     {
         private MinitwitContext _context;
 
@@ -10,7 +11,7 @@ namespace minitwit_backend.Data
             _context = context;
         }
 
-        internal  Task<List<TwitDTO>> GetMessagesAsync()
+        public Task<List<TwitDTO>> GetMessagesAsync()
         {
             return _context.Messages
                 .Join(
@@ -25,7 +26,7 @@ namespace minitwit_backend.Data
                     }).ToListAsync();
         }
 
-        internal Task<List<TwitDTO>> GetMessagesAsyncByUserName(string userName)
+        public Task<List<TwitDTO>> GetMessagesAsyncByUserName(string userName)
         {
             return _context.Messages
                 .OrderBy(x => x.MessageId)
@@ -41,6 +42,20 @@ namespace minitwit_backend.Data
                 })
                 .Where(x => x.UserName.Equals(userName))
                 .ToListAsync();
+        }
+
+        public async Task PostMessage(TwitDTO tweet, int authorId)
+        {
+            var latestMessageId = _context.Messages.Max(x => x.MessageId);
+
+            await _context.AddAsync(new Message
+            {
+                AuthorId = authorId,
+                PubDate = tweet.Date,
+                Text = tweet.Message,
+                MessageId = latestMessageId + 1
+            });
+            await _context.SaveChangesAsync();
         }
 
         public void Dispose()
