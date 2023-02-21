@@ -1,5 +1,7 @@
 ﻿namespace minitwit_backend.Data.Model;
 
+
+
 public partial class User
 {
     public int UserId { get; set; }
