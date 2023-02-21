@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import Message, {IMessage} from "../../components/message/Message";
 import "./Timeline.css";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import MessageField from "../../components/Message-field/Message-field";
 
 function Timeline() {
 
     const [messages, setMessages] = useState([]);
-    const [twit, setTwit] = useState("");
     const [loading, setLoading] = useState(false);
     const [token, setToken] = useState(true);
 
@@ -28,33 +28,11 @@ function Timeline() {
             })
     }
 
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        fetch("http://localhost:3005/postMessage", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            mode: "cors",
-            body: JSON.stringify({message: twit})
-        })
-            .then((response) => response.json())
-            .then(() => {
-                setTwit("");
-                fetchMessages();
-            })
-    }
-
 // @ts-ignore
     return (
         <div className="timeline-container">
             {token && (
-            <div>
-                <form className="post-message-form" onSubmit={handleSubmit}>
-                <textarea id="message" className="post-message-input" name="message" value={twit}
-                          onChange={e => setTwit(e.target.value)} placeholder="What's on your mind?" required/>
-                    <input className="post-message-submit" type="submit" value="Post"/>
-                </form>
-            </div>
+                <MessageField fetchMessages={fetchMessages}/>
             )}
             <div className="timeline">
                 {loading ? <LoadingSpinner/> :
