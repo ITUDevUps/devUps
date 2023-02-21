@@ -39,6 +39,8 @@ public class UserController : ControllerBase
             {
                 if (!_userRepository.TryGetUserId(user.UserName, out _))
                     await _userRepository.RegisterUser(user);
+                else
+                    error = "Username already exists";
             }
         }
         catch (Exception e)
@@ -50,7 +52,7 @@ public class UserController : ControllerBase
             return BadRequest(error);
         }
 
-        return NoContent();
+        return Ok();
     }
 
     [HttpPost("login")]
