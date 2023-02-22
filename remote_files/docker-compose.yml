@@ -30,4 +30,4 @@ services:
     volumes:
       - type: bind
         source: ./databasefile
-        target: /
+        target: /databasefile
