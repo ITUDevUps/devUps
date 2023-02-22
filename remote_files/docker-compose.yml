@@ -16,7 +16,7 @@ services:
         - '3000:3000'
 
   minitwit-backend:
-    image: ${DOCKER_USERNAME}/mysqlimage
+    image: ${DOCKER_USERNAME}/minitwit-backend
     container_name: minitwit_backend
     networks:
       - main
@@ -27,3 +27,7 @@ services:
       - ASPNETCORE_HTTP_PORT=https://+:3006
       - ASPNETCORE_URLS=http://+:3005
       - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - type: bind
+        source: ./databasefile
+        target: /
