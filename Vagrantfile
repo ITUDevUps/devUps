@@ -1,50 +1,65 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-$ssh_path = 'INSERT'
-$digitalOceanToken = 'INSERT'
-$ssh_key_name_on_digital_ocean = "INSERT"
-
-
 Vagrant.configure("2") do |config|
   config.vm.box = 'digital_ocean'
   config.vm.box_url = "https://github.com/devopsgroup-io/vagrant-digitalocean/raw/master/box/digital_ocean.box"
-  config.ssh.private_key_path = $ssh_path
-  config.vm.synced_folder ".", "/vagrant", type: "rsync"
+  config.ssh.private_key_path = '~/.ssh/id_rsa'
 
+  config.vm.synced_folder "remote_files", "/minitwit", type: "rsync"
+  config.vm.synced_folder '.', '/vagrant', disabled: true
+  
   config.vm.define "minitwit", primary: true do |server|
+
     server.vm.provider :digital_ocean do |provider|
-      provider.token = $digitalOceanToken
-      provider.ssh_key_name = $ssh_key_name_on_digital_ocean
-      provider.image = 'ubuntu-22-04-x64'
+      provider.ssh_key_name = "Vagrant"
+      provider.token = ENV["DIGITAL_OCEAN_TOKEN"]
+      provider.image = 'ubuntu-20-04-x64'
       provider.region = 'fra1'
       provider.size = 's-1vcpu-1gb'
-      provider.privatenetworking = true
     end
 
-    server.vm.hostname = "minitwit"
+    server.vm.hostname = "minitwit-ci-server"
 
+    server.vm.provision "shell", inline: 'echo "export DOCKER_USERNAME=' + "'" + ENV["DOCKER_USERNAME"] + "'" + '" >> ~/.bash_profile'
+    server.vm.provision "shell", inline: 'echo "export DOCKER_PASSWORD=' + "'" + ENV["DOCKER_PASSWORD"] + "'" + '" >> ~/.bash_profile'
+    
     server.vm.provision "shell", inline: <<-SHELL
-      echo "Installing docker"
-      sudo apt update
-      sudo apt-get update
-      sudo apt-get remove docker docker-engine containerd runc
-      sudo apt-get install docker.io
-      sudo apt-get -y install docker-compose
-      sudo apt-get update
+    
+    # Install docker and docker-compose
+    sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+    apt-cache policy docker-ce
+    sudo apt install -y docker-ce
+    sudo systemctl status docker
+    sudo usermod -aG docker ${USER}
+    sudo apt install -y docker-compose
+    
 
+    # Install make
+    sudo apt-get install -y make
+    
+    echo -e "\nVerifying that docker works ...\n"
+    docker run --rm hello-world
+    docker rmi hello-world
 
-      cp -r /vagrant/* $HOME
+    echo -e "\nOpening port for minitwit ...\n"
+    ufw allow 5000 && \
+    ufw allow 22/tcp
 
-      docker-compose up
+    echo ". $HOME/.bashrc" >> $HOME/.bash_profile
 
+    echo -e "\nConfiguring credentials as environment variables...\n"
 
+    source $HOME/.bash_profile
 
+    echo -e "\nSelecting Minitwit Folder as default folder when you ssh into the server...\n"
+    echo "cd /minitwit" >> ~/.bash_profile
+
+    chmod +x /minitwit/deploy.sh
+    
+    echo -e "\nVagrant setup done ..."
     SHELL
   end
-
-
-  config.vm.provision "shell", privileged: false, inline: <<-SHELL
-    sudo apt-get update
-  SHELL
 end
