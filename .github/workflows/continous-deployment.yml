@@ -39,6 +39,7 @@ jobs:
       - name: Build and push minitwit-backend
         uses: docker/build-push-action@v2
         with:
+
           context: ./minitwit-backend
           file: ./minitwit-backend/Dockerfile
           push: true
