@@ -1,0 +1,29 @@
+version: '3.3'
+
+networks:
+  main:
+
+services:
+
+  minitwit-frontend:
+    image: ${DOCKER_USERNAME}/minitwit-frontend
+    container_name: minitwit_fronend
+    networks:
+      - main
+    depends_on:
+      - minitwit-backend
+    ports:
+        - '3000:3000'
+
+  minitwit-backend:
+    image: ${DOCKER_USERNAME}/mysqlimage
+    container_name: minitwit_backend
+    networks:
+      - main
+    ports:
+      - '3005:3005'
+      - '3006:3006'
+    environment:
+      - ASPNETCORE_HTTP_PORT=https://+:3006
+      - ASPNETCORE_URLS=http://+:3005
+      - ASPNETCORE_ENVIRONMENT=Development
