@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using minitwit_backend.Data.Model;
+using System.IO;
 
 namespace minitwit_backend.Data;
 
@@ -22,8 +23,21 @@ public partial class MinitwitContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (!optionsBuilder.IsConfigured)
-            optionsBuilder.UseSqlite("Data Source=./Data/minitwit.db");
+        if (!optionsBuilder.IsConfigured) {
+            if (File.Exists("../databasefile/minitwit.db"))
+            {
+                Console.WriteLine("hellooo");
+                optionsBuilder.UseSqlite("Data Source=../databasefile/minitwit.db");
+            }
+            else if (File.Exists("../../databasefile/minitwit.db"))
+            {
+                optionsBuilder.UseSqlite("Data Source=../../databasefile/minitwit.db");
+            }
+            else {
+                Console.WriteLine("Error");
+            }
+        }
+            
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
