@@ -25,4 +25,12 @@ public class MessagesController : ControllerBase
     {
         return await _repo.GetMessagesAsyncByUserName(userName);
     }
+
+    [HttpPost("PostMessage")]
+    public async Task<ActionResult<TwitDTO>> PostMessage([FromBody] TwitDTO twit, int authorId)
+    {
+        await _repo.PostMessageAsync(twit, authorId);
+        return Ok();
+    }
+
 }
