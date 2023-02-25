@@ -1,4 +1,6 @@
-﻿namespace minitwit_backend.Data.Model;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace minitwit_backend.Data.Model;
 
 
 

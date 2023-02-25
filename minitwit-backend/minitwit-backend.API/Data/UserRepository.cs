@@ -30,14 +30,12 @@ namespace minitwit_backend.Data
 
         public async Task RegisterUser(ApiSimUser apiSimUser)
         {
-            var latestUserId = _context.Users.Max(x => x.UserId);
 
             await _context.AddAsync(new User
             {
                 Email = apiSimUser.Email!,
-                UserId = latestUserId + 1,
                 Username = apiSimUser.UserName!,
-                PwHash = apiSimUser.Password! //TODO Generate password hash
+                PwHash = apiSimUser.pwd! //TODO Generate password hash
             });
             await _context.SaveChangesAsync();
         }
@@ -65,14 +63,12 @@ namespace minitwit_backend.Data
 
         public async Task RegisterUser(RegisterUserDTO user)
         {
-            var latestUserId = _context.Users.Max(x => x.UserId);
 
             var hashedPassword = HashPasword(user.Password, out var salt);
 
             await _context.AddAsync(new User
             {
                 Email = user.Email!,
-                UserId = latestUserId + 1,
                 Username = user.UserName!,
                 PwHash = Convert.ToHexString(salt) + ":" + hashedPassword!
             });

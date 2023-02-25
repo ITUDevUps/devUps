@@ -37,7 +37,7 @@ public class SimApiController : ControllerBase
             {
                 error = "You have to enter a valid email address";
             }
-            else if (String.IsNullOrEmpty(user.Password))
+            else if (String.IsNullOrEmpty(user.pwd))
             {
                 error = "You have to enter a password";
             }
