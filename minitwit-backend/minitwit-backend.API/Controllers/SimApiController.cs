@@ -91,7 +91,7 @@ public class SimApiController : ControllerBase
                     return NotFound(follow.Unfollow);
                 }
 
-                await _userRepository.Unfollow(userId, unFollowId);
+                await _userRepository.UnFollow(userId, unFollowId);
             }
         }
         catch (Exception e)

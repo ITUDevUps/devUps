@@ -31,8 +31,9 @@ public partial class MinitwitContext : DbContext
                 optionsBuilder.UseSqlite("Data Source=../../databasefile/minitwit.db");
             }
             else {
-                Console.WriteLine("Error");
+                optionsBuilder.UseSqlite("Data Source=../../databasefile/minitwit.db");
             }
+
         }
             
     }
@@ -67,7 +68,7 @@ public partial class MinitwitContext : DbContext
             entity.Property(e => e.Username)
                 .HasColumnType("string")
                 .HasColumnName("username");
-            entity.HasMany(e => e.Follows).WithMany(e => e.Following);
+            entity.HasMany(e => e.Following).WithMany(e => e.Followers);
         });
 
         OnModelCreatingPartial(modelBuilder);
