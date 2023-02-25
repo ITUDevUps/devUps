@@ -12,6 +12,10 @@ services:
       - ASPNETCORE_HTTP_PORT=https://+:3006
       - ASPNETCORE_URLS=http://+:3005
       - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - type: bind
+        source: ./databasefile
+        target: /databasefile
   minitwitfrontend:
     build: ./minitwit-frontend
     ports:

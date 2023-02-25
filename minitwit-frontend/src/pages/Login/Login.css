@@ -1,0 +1,24 @@
+.login-form-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 260px;
+}
+
+.login-input {
+    margin: 5px 0 15px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.login-submit {
+    margin: 15px 0 5px;
+    padding: 10px;
+    font: bold 16px Arial;
+    border-radius: 5px;
+    -webkit-appearance: button;
+}
+
+.login-label {
+    font-size: 15px;
+    text-align: left;
+}

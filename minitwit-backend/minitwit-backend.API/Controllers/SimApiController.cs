@@ -112,7 +112,7 @@ public class SimApiController : ControllerBase
         {
             if (_userRepository.TryGetUserId(username, out var userid))
             {
-                await _messageRepository.PostMessage(new TwitDTO
+                await _messageRepository.PostMessageAsync(new TwitDTO
                 {
                     UserName = username,
                     Date = (int)DateTime.UtcNow.Ticks,
