@@ -17,6 +17,11 @@
     margin: 0 20px;
 }
 
+.logout-button {
+    cursor: pointer;
+    text-decoration-line: underline;
+}
+
 .left-side-nav {
     display: flex;
     align-items: center;

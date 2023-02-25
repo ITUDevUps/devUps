@@ -19,6 +19,7 @@ function Login() {
             .then((res) => {
                 if(res.message !== -1) {
                     window.location.href = "/";
+                    localStorage.setItem("token", "coolToken");
                 } else {
                     alert(res.message);
                 }
