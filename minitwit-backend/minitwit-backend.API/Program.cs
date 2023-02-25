@@ -4,7 +4,6 @@ using minitwit_backend.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IMessageRepository, MessageRepository>();
-builder.Services.AddScoped<IFollowerRepository, FollowerRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddControllers();
 builder.Services.AddEntityFrameworkSqlite().AddDbContext<MinitwitContext>();

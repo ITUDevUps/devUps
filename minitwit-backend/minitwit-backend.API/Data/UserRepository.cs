@@ -44,14 +44,12 @@ namespace minitwit_backend.Data
 
         public async Task RegisterUser(ApiSimUser apiSimUser)
         {
-            var latestUserId = _context.Users.Max(x => x.UserId);
 
             await _context.AddAsync(new User
             {
                 Email = apiSimUser.Email!,
-                UserId = latestUserId + 1,
                 Username = apiSimUser.UserName!,
-                PwHash = apiSimUser.Password! //TODO Generate password hash
+                PwHash = apiSimUser.pwd! //TODO Generate password hash
             });
             await _context.SaveChangesAsync();
         }
@@ -60,36 +58,95 @@ namespace minitwit_backend.Data
         {
             var userFromDatabase = await _context.Users.FirstOrDefaultAsync<User>(u => u.Username == userLoginDTO.UserName);
 
-            if (userFromDatabase != null) {
+            if (userFromDatabase != null)
+            {
                 var salt = userFromDatabase.PwHash.Split(":")[0];
                 var hash = userFromDatabase.PwHash.Split(":")[1];
                 if (VerifyPassword(userLoginDTO.Password, hash, Convert.FromHexString(salt)))
                 {
                     return userFromDatabase.UserId;
                 }
-                else {
+                else
+                {
                     return -1;
                 };
             }
-            return -1;              
+            return -1;
         }
 
 
         public async Task RegisterUser(RegisterUserDTO user)
         {
-            var latestUserId = _context.Users.Max(x => x.UserId);
 
             var hashedPassword = HashPasword(user.Password, out var salt);
 
             await _context.AddAsync(new User
             {
                 Email = user.Email!,
-                UserId = latestUserId + 1,
                 Username = user.UserName!,
-                PwHash = Convert.ToHexString(salt)+":"+ hashedPassword! 
+                PwHash = Convert.ToHexString(salt) + ":" + hashedPassword!
             });
             await _context.SaveChangesAsync();
         }
+
+        public async Task Follow(int fromId, int toId)
+        {
+            var user = await _context
+                .Users
+                .Include(x => x.Following)
+                .FirstOrDefaultAsync(x => x.UserId.Equals(fromId));
+
+            var otherUser = await _context
+                .Users
+                .Include(x => x.Followers)
+                .FirstOrDefaultAsync(x => x.UserId.Equals(toId));
+
+            if (user == null || otherUser == null)
+            {
+                throw new ArgumentException();
+            }
+
+            if (user.Following.Contains(otherUser) || otherUser.Followers.Contains(user))
+            {
+                //Already Following
+                return;
+            }
+
+            user.Following.Add(otherUser);
+            otherUser.Followers.Add(user);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UnFollow(int fromId, int toId)
+        {
+            var user = await _context
+                .Users
+                .Include(x => x.Following)
+                .FirstOrDefaultAsync(x => x.UserId.Equals(fromId));
+
+            var otherUser = await _context
+                .Users
+                .Include(x => x.Followers)
+                .FirstOrDefaultAsync(x => x.UserId.Equals(toId));
+
+            if (user == null || otherUser == null)
+            {
+                throw new ArgumentException();
+            }
+
+            if (!user.Following.Contains(otherUser) || !otherUser.Followers.Contains(user))
+            {
+                //Already Following
+                return;
+            }
+
+            user.Following.Remove(otherUser);
+            otherUser.Followers.Remove(user);
+
+            await _context.SaveChangesAsync();
+        }
+
 
         //Util for hashing password and verifying
 

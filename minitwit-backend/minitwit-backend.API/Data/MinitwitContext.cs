@@ -15,8 +15,6 @@ public partial class MinitwitContext : DbContext
     {
     }
 
-    public virtual DbSet<Follower> Followers { get; set; }
-
     public virtual DbSet<Message> Messages { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
@@ -26,7 +24,6 @@ public partial class MinitwitContext : DbContext
         if (!optionsBuilder.IsConfigured) {
             if (File.Exists("../databasefile/minitwit.db"))
             {
-                Console.WriteLine("hellooo");
                 optionsBuilder.UseSqlite("Data Source=../databasefile/minitwit.db");
             }
             else if (File.Exists("../../databasefile/minitwit.db"))
@@ -34,23 +31,15 @@ public partial class MinitwitContext : DbContext
                 optionsBuilder.UseSqlite("Data Source=../../databasefile/minitwit.db");
             }
             else {
-                Console.WriteLine("Error");
+                optionsBuilder.UseSqlite("Data Source=../../databasefile/minitwit.db");
             }
+
         }
             
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Follower>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("follower");
-
-            entity.Property(e => e.WhoId).HasColumnName("who_id");
-            entity.Property(e => e.WhomId).HasColumnName("whom_id");
-        });
 
         modelBuilder.Entity<Message>(entity =>
         {
@@ -79,6 +68,7 @@ public partial class MinitwitContext : DbContext
             entity.Property(e => e.Username)
                 .HasColumnType("string")
                 .HasColumnName("username");
+            entity.HasMany(e => e.Following).WithMany(e => e.Followers);
         });
 
         OnModelCreatingPartial(modelBuilder);
