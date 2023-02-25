@@ -1,0 +1,14 @@
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    height: 22px;
+}
+
+.search-icon {
+    fill: #61dafb;
+    height: 1em;
+    cursor: pointer;
+}

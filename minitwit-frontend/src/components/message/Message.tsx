@@ -4,7 +4,7 @@ import "./Message.css";
 export interface IMessage {
     image: string;
     userName: string;
-    message: string;
+    text: string;
     date: string;
 }
 
@@ -18,7 +18,7 @@ function Message(props: IMessage) {
                     {props.userName}
                 </a>
                 <p className="message">
-                {props.message}
+                {props.text}
                 </p>
                 <p className="date">
                     <>
