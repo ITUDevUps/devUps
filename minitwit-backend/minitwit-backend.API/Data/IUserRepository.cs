@@ -9,6 +9,8 @@ public interface IUserRepository : IDisposable
 
     public Task<int> VerifyLogin(UserLoginDTO userLoginDTO);
     public bool TryGetUserId(string username, out int id);
+
+    public Task<List<UserDTO>> GetUsersAsync();
     public Task UnFollow(int fromId, int toId);
     public Task Follow(int fromId, int toId);
 }
