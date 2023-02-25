@@ -7,7 +7,7 @@ function MessageField(props: Props) {
     const [twit, setTwit] = useState("");
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        fetch("http://localhost:3005/postMessage", {
+        fetch("http://157.245.27.152:3005/postMessage", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             mode: "cors",
