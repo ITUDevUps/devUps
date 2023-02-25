@@ -11,14 +11,13 @@ public class SimApiController : ControllerBase
 
     private readonly IMessageRepository _messageRepository;
     private readonly IUserRepository _userRepository;
-    private readonly IFollowerRepository _followerRepository;
+   
 
     private static int _latest = 0;
 
-    public SimApiController(IUserRepository userRepository, IFollowerRepository followerRepository, IMessageRepository messageRepository)
+    public SimApiController(IUserRepository userRepository, IMessageRepository messageRepository)
     {
         _userRepository = userRepository;
-        _followerRepository = followerRepository;
         _messageRepository = messageRepository;
     }
 
@@ -83,7 +82,7 @@ public class SimApiController : ControllerBase
                     return NotFound(follow.Unfollow);
                 }
 
-                await _followerRepository.Follow(userId, followId);
+                await _userRepository.Follow(userId, followId);
             }
             else if (!string.IsNullOrEmpty(follow.Unfollow))
             {
@@ -92,7 +91,7 @@ public class SimApiController : ControllerBase
                     return NotFound(follow.Unfollow);
                 }
 
-                await _followerRepository.Follow(userId, unFollowId);
+                await _userRepository.Unfollow(userId, unFollowId);
             }
         }
         catch (Exception e)

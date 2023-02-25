@@ -11,4 +11,7 @@ public partial class User
     public string Email { get; set; } = null!;
 
     public string PwHash { get; set; } = null!;
+
+    public ISet<User> Following { get; set; } = new HashSet<User>();
+    public ISet<User> Follows { get;set; } = new HashSet<User>();
 }
