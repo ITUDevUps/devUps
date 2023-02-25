@@ -28,6 +28,20 @@ namespace minitwit_backend.Data
             return id != -1;
         }
 
+        public Task<List<UserDTO>> GetUsersAsync()
+        {
+            return _context.Users
+                .Join(
+                    _context.Users,
+                    users => users.UserId,
+                    users => users.UserId,
+                    (user, user2) => new UserDTO
+                    {
+                        UserId = user.UserId,
+                        UserName = user.Username
+                    }).ToListAsync();
+        }
+
         public async Task RegisterUser(ApiSimUser apiSimUser)
         {
             var latestUserId = _context.Users.Max(x => x.UserId);

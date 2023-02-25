@@ -95,5 +95,11 @@ public class UserController : ControllerBase
         return NoContent();
     }
 
+    [HttpGet("GetUsers")]
+    public async Task<ActionResult<List<UserDTO>>> GetUsers()
+    {
+        return await _userRepository.GetUsersAsync();
+    }
+
 
 }
