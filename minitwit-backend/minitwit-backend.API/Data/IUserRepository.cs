@@ -10,5 +10,5 @@ public interface IUserRepository : IDisposable
     public Task<int> VerifyLogin(UserLoginDTO userLoginDTO);
     public bool TryGetUserId(string username, out int id);
 
-    internal Task<List<UserDTO>> GetUsersAsync();
+    public Task<List<UserDTO>> GetUsersAsync();
 }
