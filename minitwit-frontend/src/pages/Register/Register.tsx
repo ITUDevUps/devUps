@@ -10,7 +10,7 @@ function Register() {
     const handleSubmit= (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        fetch("http://localhost:3005/user/register",
+        fetch("http://157.245.27.152:3005/user/register",
             {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},

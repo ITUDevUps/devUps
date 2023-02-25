@@ -9,7 +9,7 @@ function Login() {
     const handleSubmit= (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        fetch("http://localhost:3005/user/login",
+        fetch("http://157.245.27.152:3005/user/login",
             {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
