@@ -31,7 +31,6 @@ public partial class MinitwitContext : DbContext
         modelBuilder.Entity<Follower>(entity =>
         {
             entity
-                .HasNoKey()
                 .ToTable("follower");
 
             entity.Property(e => e.WhoId).HasColumnName("who_id");
