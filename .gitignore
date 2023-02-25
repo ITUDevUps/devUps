@@ -825,3 +825,4 @@ sketch
 # End of https://www.toptal.com/developers/gitignore/api/macos,windows,linux,python,jetbrains+all,visualstudiocode,visualstudio,database,react,dotnetcore,csharp
 /minitwit-frontend/.idea/workspace.xml
 /minitwit-frontend/.idea/inspectionProfiles/
+/.vagrant
