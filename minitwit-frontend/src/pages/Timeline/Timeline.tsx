@@ -8,7 +8,6 @@ function Timeline() {
 
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [token, setToken] = useState(true);
 
     useEffect(() => {
         fetchMessages();
@@ -31,7 +30,7 @@ function Timeline() {
 // @ts-ignore
     return (
         <div className="timeline-container">
-            {token && (
+            {(localStorage.getItem("token") !== null) && (
                 <MessageField fetchMessages={fetchMessages}/>
             )}
             <div className="timeline">
