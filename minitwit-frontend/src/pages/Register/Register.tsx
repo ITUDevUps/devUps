@@ -3,18 +3,39 @@ import './Register.css';
 
 function Register() {
 
-    const [username, setUsername] = useState('');
+    const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const handleSubmit= (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        fetch("http://localhost:3005/user/register",
+            {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                mode: "cors",
+                body: JSON.stringify({username: userName, password, email})
+            })
+            .then((res) => {
+                if(res.status === 200) {
+                    window.location.href = "/login";
+                } else {
+                    alert("An error has occurred");
+                }
+            }).catch((err) => {
+                alert(err);
+        })
+    }
 
     return (
         <div>
             <h2>Sign Up</h2>
-            <form className="register-form-container">
+            <form className="register-form-container" onSubmit={handleSubmit}>
                 <label htmlFor="username" className="register-label">
                     Username
                 </label>
-                <input id="username" className="register-input" type="text" name="username" value={username} onChange={e => setUsername(e.target.value)} autoFocus required/>
+                <input id="username" className="register-input" type="text" name="username" value={userName} onChange={e => setUserName(e.target.value)} autoFocus required/>
                 <label htmlFor="email" className="register-label">
                     E-mail
                 </label>

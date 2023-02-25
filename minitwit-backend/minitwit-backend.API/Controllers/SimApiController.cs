@@ -11,18 +11,21 @@ public class SimApiController : ControllerBase
 
     private readonly IMessageRepository _messageRepository;
     private readonly IUserRepository _userRepository;
-    private readonly IFollowerRepository _followerRepository;
+   
 
-    public SimApiController(IUserRepository userRepository, IFollowerRepository followerRepository, IMessageRepository messageRepository)
+    private static int _latest = 0;
+
+    public SimApiController(IUserRepository userRepository, IMessageRepository messageRepository)
     {
         _userRepository = userRepository;
-        _followerRepository = followerRepository;
         _messageRepository = messageRepository;
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> RegisterUser(ApiSimUser user)
+    public async Task<IActionResult> RegisterUser([FromBody]ApiSimUser user, [FromQuery] int? latest)
     {
+        UpdateLatest(latest);
+
         var error = string.Empty;
         try
         {
@@ -34,7 +37,7 @@ public class SimApiController : ControllerBase
             {
                 error = "You have to enter a valid email address";
             }
-            else if (String.IsNullOrEmpty(user.Password))
+            else if (String.IsNullOrEmpty(user.pwd))
             {
                 error = "You have to enter a password";
             }
@@ -42,6 +45,10 @@ public class SimApiController : ControllerBase
             {
                 if (!_userRepository.TryGetUserId(user.UserName, out _))
                     await _userRepository.RegisterUser(user);
+                else
+                {
+                    error = "The username is already taken";
+                }
             }
         }
         catch (Exception e)
@@ -57,8 +64,10 @@ public class SimApiController : ControllerBase
     }
 
     [HttpPost("fllws/{username}")]
-    public async Task<IActionResult> FollowUser(string username, ApiSimFollow follow)
+    public async Task<IActionResult> FollowUser([FromRoute]string username, [FromBody]ApiSimFollow follow, [FromQuery] int? latest)
     {
+        UpdateLatest(latest);
+
         try
         {
             if (!_userRepository.TryGetUserId(username, out var userId))
@@ -70,19 +79,19 @@ public class SimApiController : ControllerBase
             {
                 if (!_userRepository.TryGetUserId(follow.Follow, out var followId))
                 {
-                    return NotFound(follow.UnFollow);
+                    return NotFound(follow.Unfollow);
                 }
 
-                await _followerRepository.Follow(userId, followId);
+                await _userRepository.Follow(userId, followId);
             }
-            else if (!string.IsNullOrEmpty(follow.UnFollow))
+            else if (!string.IsNullOrEmpty(follow.Unfollow))
             {
-                if (!_userRepository.TryGetUserId(follow.UnFollow, out var unFollowId))
+                if (!_userRepository.TryGetUserId(follow.Unfollow, out var unFollowId))
                 {
-                    return NotFound(follow.UnFollow);
+                    return NotFound(follow.Unfollow);
                 }
 
-                await _followerRepository.Follow(userId, unFollowId);
+                await _userRepository.UnFollow(userId, unFollowId);
             }
         }
         catch (Exception e)
@@ -93,14 +102,16 @@ public class SimApiController : ControllerBase
     }
 
     [HttpPost("msgs/{username}")]
-    public async Task<IActionResult> Tweet(string username, ApiSimTweet tweet)
+    public async Task<IActionResult> Tweet([FromRoute]string username, [FromBody]ApiSimTweet tweet, [FromQuery] int? latest)
     {
+        UpdateLatest(latest);
+
         var error = string.Empty;
         try
         {
             if (_userRepository.TryGetUserId(username, out var userid))
             {
-                await _messageRepository.PostMessage(new TwitDTO
+                await _messageRepository.PostMessageAsync(new TwitDTO
                 {
                     UserName = username,
                     Date = (int)DateTime.UtcNow.Ticks,
@@ -122,5 +133,19 @@ public class SimApiController : ControllerBase
             return BadRequest(error);
         }
         return NoContent();
+    }
+
+    [HttpGet("latest")]
+    public async Task<ApiSimLatest> GetLatest()
+    {
+        return new ApiSimLatest { Latest = _latest };
+    }
+
+    private void UpdateLatest(int? latest)
+    {
+        if (latest != null)
+        {
+            _latest = latest.Value;
+        }
     }
 }

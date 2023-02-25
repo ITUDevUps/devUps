@@ -3,18 +3,26 @@ import './Login.css';
 
 function Login() {
 
-    const [username, setUsername] = useState('');
+    const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit= (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        fetch("http://localhost:3005/getMessages",
+        fetch("http://localhost:3005/user/login",
             {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 mode: "cors",
-                body: JSON.stringify({username, password})
+                body: JSON.stringify({username: userName, password})
+            }).then(res => res.json())
+            .then((res) => {
+                if(res.message !== -1) {
+                    window.location.href = "/";
+                    localStorage.setItem("token", "coolToken");
+                } else {
+                    alert(res.message);
+                }
             })
     }
 
@@ -25,7 +33,7 @@ function Login() {
                 <label htmlFor="username" className="login-label">
                     Username
                 </label>
-                <input id="username" className="login-input" type="text" name="username" autoFocus value={username} onChange={e => setUsername(e.target.value)}/>
+                <input id="username" className="login-input" type="text" name="username" autoFocus value={userName} onChange={e => setUserName(e.target.value)}/>
                 <label htmlFor="password" className="login-label">
                     Password
                 </label>
