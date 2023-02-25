@@ -6,42 +6,6 @@
     padding: 20px 0 100px;
 }
 
-.post-message-form {
-    width: 30vw;
-    margin: 0 0 20px;
-    position: relative;
-    min-width: 220px;
-}
-
-.post-message-input {
-    height: 10vh;
-    padding: 10px;
-    border-radius: 5px;
-    resize:none;
-    -webkit-appearance: textfield;
-    -moz-appearance: textfield;
-    appearance: textfield;
-    width: 100%;
-}
-
-.post-message-submit {
-    width: 70px;
-    padding: 10px;
-    font: bold 16px Arial;
-    border: none;
-    -webkit-appearance: button;
-    cursor: pointer;
-    background: rgb(136, 136, 136, 0.2);
-    border-radius: 5px;
-    position: absolute;
-    bottom: 0;
-    right: -22px;
-}
-
-.post-message-submit:hover {
-    background: rgb(136, 136, 136, 0.4);
-}
-
 .timeline {
     width: 60%;
     min-width: 270px;
