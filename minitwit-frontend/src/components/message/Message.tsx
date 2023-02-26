@@ -18,11 +18,11 @@ function Message(props: IMessage) {
                     {props.userName}
                 </a>
                 <p className="message">
-                {props.text}
+                    {props.text}
                 </p>
                 <p className="date">
                     <>
-                &mdash; {props.date}
+                        &mdash; {props.date}
                     </>
                 </p>
             </>

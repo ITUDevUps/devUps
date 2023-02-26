@@ -1,14 +1,25 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './SearchBar.css';
 import {ReactComponent as SearchIcon} from "../../assets/icons/search-icon.svg";
 import {User} from "../../Util/Types";
 import SearchCell from "./SearchCell";
 
+const testUsers: User[] = [
+    {userName: "test1", userID: 1},
+    {userName: "test2", userID: 2},
+    {userName: "test3", userID: 3},
+    {userName: "test4", userID: 4},
+    {userName: "test5", userID: 5},
+    {userName: "test6", userID: 6},
+]
+
 function SearchBar() {
-    const [searchbarActive, setSearchbarActive] = React.useState(false);
-    const [searchQuery, setSearchQuery] = React.useState("");
-    const [users, setUsers] = React.useState([]);
-    const [foundUsers, setFoundUsers] = React.useState([]);
+    const [searchbarActive, setSearchbarActive] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [users, setUsers] = useState([]);
+    const [foundUsers, setFoundUsers] = useState(testUsers);
+
+    const fetchApi = "http://207.154.228.44:3005/GetUsers";
 
     useEffect(() => {
         fetchUsers();
@@ -24,19 +35,18 @@ function SearchBar() {
             const res = users.filter((user: User) => user.userName.includes(query));
             setFoundUsers(res);
         }
-
         setSearchQuery(query);
     }
 
     const fetchUsers = () => {
-        fetch("http://207.154.228.44:3005/GetUsers", {
+        fetch(fetchApi, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             mode: "cors",
         })
-            .then((response) => response.json())
-            .then((json) => {
-                setUsers(json);
+            .then((res) => res.json())
+            .then((res) => {
+                //setUsers(res);
             })
     }
 

@@ -8,6 +8,7 @@ function Timeline() {
 
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
+    const fetchApi = "http://207.154.228.44:3005/getMessages";
 
     useEffect(() => {
         fetchMessages();
@@ -15,7 +16,7 @@ function Timeline() {
 
     const fetchMessages = () => {
         setLoading(true);
-        fetch("http://207.154.228.44:3005/getMessages", {
+        fetch(fetchApi, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             mode: "cors",

@@ -16,7 +16,6 @@ function App() {
                 <div className="navigation">
                     <div className="left-side-nav">
                         <Link className="nav-link" to="/">Timeline</Link>
-
                         <SearchBar/>
                     </div>
                     {(localStorage.getItem("token") === null) && (
