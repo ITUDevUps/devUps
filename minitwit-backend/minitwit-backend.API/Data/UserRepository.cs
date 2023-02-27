@@ -147,6 +147,12 @@ namespace minitwit_backend.Data
             await _context.SaveChangesAsync();
         }
 
+        public async Task<APISimFollowing> GetFollowering(int userId)
+        { 
+            var following = await _context.Users.Include(x => x.Following).Where(u => u.UserId.Equals(userId)).SelectMany(u => u.Following).Select(u => u.Username).ToListAsync();
+            return new APISimFollowing { follows = following };
+        }
+
 
         //Util for hashing password and verifying
 
