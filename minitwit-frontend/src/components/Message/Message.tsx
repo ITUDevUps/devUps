@@ -1,12 +1,6 @@
 import React from 'react';
 import "./Message.css";
-
-export interface IMessage {
-    image: string;
-    userName: string;
-    text: string;
-    date: string;
-}
+import {IMessage} from "../../Util/Types";
 
 function Message(props: IMessage) {
     return (
