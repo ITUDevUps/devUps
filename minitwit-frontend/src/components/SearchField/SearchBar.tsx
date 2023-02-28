@@ -18,6 +18,7 @@ function SearchBar() {
     const [searchQuery, setSearchQuery] = useState("");
     const [users, setUsers] = useState([]);
     const [foundUsers, setFoundUsers] = useState(testUsers);
+    const [showSearch, setShowSearch] = useState(false);
 
     const fetchApi = "http://207.154.228.44:3005/GetUsers";
 
@@ -30,8 +31,9 @@ function SearchBar() {
 
         if(query === "") {
             setFoundUsers(users);
-            return;
+            setShowSearch(false);
         } else {
+            setShowSearch(true);
             const res = users.filter((user: User) => user.userName.includes(query));
             setFoundUsers(res);
         }
@@ -57,13 +59,15 @@ function SearchBar() {
                 <input className="search-input" type="text" placeholder="Search..." value={searchQuery}
                        onChange={searchUsers}/>
             )}
-            {foundUsers && foundUsers.length !== 0 ? (
+            <div className="searchCell-container">
+            {showSearch && foundUsers.length !== 0 ? (
                 foundUsers.map((user: User, index) => (
                 <SearchCell key={index} userName={user.userName} userID={user.userID} />
                     ))
                 ) : (
                  <></>
                 )}
+            </div>
         </div>
     );
 }
