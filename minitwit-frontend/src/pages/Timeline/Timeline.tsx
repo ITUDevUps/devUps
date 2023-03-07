@@ -11,6 +11,7 @@ function Timeline() {
 
     useEffect(() => {
         fetchMessages();
+        
     }, [])
 
     const fetchMessages = () => {
@@ -19,6 +20,7 @@ function Timeline() {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             mode: "cors",
+
         })
             .then((response) => response.json())
             .then((json) => {
@@ -35,7 +37,7 @@ function Timeline() {
             )}
             <div className="timeline">
                 {loading ? <LoadingSpinner/> :
-                    messages.length !== 0 ? messages.map((message: IMessage, index) => (
+                    messages.length !== 0 ? messages.filter((message:IMessage,index) => (index < 100)).map((message: IMessage, index) => (
                             <Message
                                 key={index}
                                 image={"https://uploads.neatorama.com/images/posts/376/63/63376/1373756607-0.jpg"}
