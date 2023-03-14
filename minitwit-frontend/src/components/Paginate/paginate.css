@@ -1,0 +1,27 @@
+.custom-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .custom-pagination > a {
+    color: #007bff;
+    background-color: #fff;
+    border-color: #007bff;
+    padding: 0.5rem 0.75rem;
+    margin: 0 0.5rem;
+    border-radius: 0.25rem;
+  }
+  
+  .custom-pagination > .active {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .item:hover {
+    color: #93C3FA;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
