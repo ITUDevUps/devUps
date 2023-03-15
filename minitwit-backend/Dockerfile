@@ -15,6 +15,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal
 WORKDIR /app
 COPY --from=build /app .
 
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 3005
 EXPOSE 3006

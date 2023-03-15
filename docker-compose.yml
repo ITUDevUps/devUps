@@ -2,6 +2,10 @@
 
 version: "3.4"
 
+networks:
+    main:
+        name: itu-minitwit-network
+
 services:
   minitwitbackend:
     build: ./minitwit-backend
@@ -16,7 +20,36 @@ services:
       - type: bind
         source: ./databasefile
         target: /databasefile
+    networks:
+        - main
+    depends_on:
+        - grafana
+        - prometheus
+
   minitwitfrontend:
     build: ./minitwit-frontend
     ports:
       - 3000:3000
+    networks:
+        - main
+    depends_on:
+        - minitwitbackend
+        - prometheus
+        - grafana
+
+  prometheus:
+      image: prom/prometheus
+      container_name: prometheus
+      volumes:
+          - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      ports:
+          - "9090:9090"
+      networks:
+          - main
+
+  grafana:
+      image: grafana/grafana:4.5.2
+      ports:
+          - "9099:9099"
+      networks:
+          - main

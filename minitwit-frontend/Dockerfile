@@ -17,6 +17,9 @@ RUN npm install --silent
 # Copy the rest of the application code to the container
 COPY . ./
 
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
 RUN npm run build
 
 EXPOSE 3000
