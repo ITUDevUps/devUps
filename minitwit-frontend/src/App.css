@@ -22,7 +22,7 @@
     text-decoration-line: underline;
 }
 
-.left-side-nav {
+.nav-links {
     display: flex;
     align-items: center;
 }

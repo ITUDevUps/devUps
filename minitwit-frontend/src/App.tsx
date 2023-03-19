@@ -14,7 +14,7 @@ function App() {
         <div className="App">
             <header className="App-header">
                 <div className="navigation">
-                    <div className="left-side-nav">
+                    <div className="nav-links">
                         <Link className="nav-link" to="/">Timeline</Link>
                         <SearchBar/>
                     </div>
@@ -25,9 +25,12 @@ function App() {
                         </div>
                     )}
                     {(localStorage.getItem("token") !== null) && (
-                        <div>
-                            <p className="nav-link logout-button" onClick={logout}>Logout</p>
-                        </div>
+                        <>
+                            <div className="nav-links">
+                                <Link className="nav-link" to="/user/">Profile</Link>
+                                <p className="nav-link logout-button" onClick={logout}>Logout</p>
+                            </div>
+                        </>
                     )}
                 </div>
                 <h1>MiniTwit</h1>
