@@ -12,7 +12,7 @@ function Message(props: IMessage) {
                     {props.userName}
                 </a>
                 <p className="message">
-                    {props.text}
+                    {props.message}
                 </p>
                 <p className="date">
                     <>

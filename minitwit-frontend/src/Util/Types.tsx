@@ -6,6 +6,6 @@ export interface User {
 export interface IMessage {
     image: string;
     userName: string;
-    text: string;
+    message: string;
     date: string;
 }

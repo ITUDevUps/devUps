@@ -46,7 +46,7 @@ function Timeline({ endpoint } : TimelineProps) {
                 key={index}
                 image={'https://uploads.neatorama.com/images/posts/376/63/63376/1373756607-0.jpg'}
                 userName={message.userName}
-                text={message.text}
+                message={message.message}
                 date={new Date(parseInt(message.date)).toLocaleString()}
             />
         ));
