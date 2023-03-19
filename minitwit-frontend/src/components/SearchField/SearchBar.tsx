@@ -4,23 +4,14 @@ import {ReactComponent as SearchIcon} from "../../assets/icons/search-icon.svg";
 import {User} from "../../Util/Types";
 import SearchCell from "./SearchCell";
 
-const testUsers: User[] = [
-    {userName: "test1", userID: 1},
-    {userName: "test2", userID: 2},
-    {userName: "test3", userID: 3},
-    {userName: "test4", userID: 4},
-    {userName: "test5", userID: 5},
-    {userName: "test6", userID: 6},
-]
-
 function SearchBar() {
     const [searchbarActive, setSearchbarActive] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [users, setUsers] = useState([]);
-    const [foundUsers, setFoundUsers] = useState(testUsers);
+    const [foundUsers, setFoundUsers] = useState([]);
     const [showSearch, setShowSearch] = useState(false);
 
-    const fetchApi = "http://207.154.228.44:3005/GetUsers";
+    const fetchApi = "http://207.154.228.44:3005/user/GetUsers";
 
     useEffect(() => {
         fetchUsers();
@@ -34,7 +25,7 @@ function SearchBar() {
             setShowSearch(false);
         } else {
             setShowSearch(true);
-            const res = users.filter((user: User) => user.userName.includes(query));
+            const res = users.filter((user: User) => user.userName.startsWith(query));
             setFoundUsers(res);
         }
         setSearchQuery(query);
@@ -48,7 +39,7 @@ function SearchBar() {
         })
             .then((res) => res.json())
             .then((res) => {
-                //setUsers(res);
+                setUsers(res);
             })
     }
 

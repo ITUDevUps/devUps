@@ -5,7 +5,7 @@ import {User} from "../../Util/Types";
 
 function SearchCell(user: User) {
     function goToUser() {
-        window.location.href = "/user/" + user.userID;
+        window.location.href = "/user/" + user.userName;
     }
 
     return (
