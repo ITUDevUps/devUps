@@ -13,4 +13,6 @@ public interface IUserRepository : IDisposable
     public Task<List<UserDTO>> GetUsersAsync();
     public Task UnFollow(int fromId, int toId);
     public Task Follow(int fromId, int toId);
+
+    public Task<APISimFollowing> GetFollowering(int userId);
 }
