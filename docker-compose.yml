@@ -49,6 +49,7 @@ services:
 
   grafana:
       image: grafana/grafana:4.5.2
+      platform: linux/amd64
       ports:
           - "9099:9099"
       networks:

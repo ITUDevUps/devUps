@@ -1,4 +1,4 @@
-
+FROM python:3
 
 # Build stage
 FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
@@ -15,8 +15,10 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal
 WORKDIR /app
 COPY --from=build /app .
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN set -xe \
+    && apt-get update -y \
+    && apt-get install -y python3-pip
+# RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 3005
 EXPOSE 3006
