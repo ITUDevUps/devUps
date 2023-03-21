@@ -1,8 +1,9 @@
 import React from 'react';
+import './FollowUserButton.css';
 
 function FollowUserButton() {
 	return (
-		<button>Follow</button>
+		<button className="button">Follow user</button>
 	);
 }
 
