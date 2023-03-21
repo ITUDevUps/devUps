@@ -1,0 +1,25 @@
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    height: 22px;
+}
+
+.search-icon {
+    fill: #61dafb;
+    height: 1em;
+    cursor: pointer;
+}
+
+.searchCell-container {
+    position: absolute;
+    top: 50px;
+    left: 229px;
+    width: 151px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+}

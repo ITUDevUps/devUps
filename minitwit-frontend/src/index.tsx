@@ -7,7 +7,8 @@ import {createBrowserRouter, RouterProvider,} from "react-router-dom";
 import ErrorPage from "./pages/Error/ErrorPage";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-import Timeline from "./pages/Timeline/Timeline";
+import TimelinePage from "./pages/Timeline/TimelinePage";
+import UserPage from "./pages/User/UserPage";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "",
-                element: <Timeline/>,
+                element: <TimelinePage/>,
             },
             {
                 path: "login",
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
             {
                 path: "sign-up",
                 element: <Register/>,
+            },
+            {
+                path: "user/:userName",
+                element: <UserPage/>,
             }
         ],
     }

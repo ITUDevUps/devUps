@@ -101,6 +101,29 @@ public class SimApiController : ControllerBase
         return NoContent();
     }
 
+    [HttpGet("fllws/{username}")]
+    public async Task<IActionResult> GetFollowUser([FromRoute] string username, [FromQuery] int? latest)
+    {
+        UpdateLatest(latest);
+
+        try
+        {
+            if (!_userRepository.TryGetUserId(username, out var userId))
+            {
+                return NotFound(username);
+            }
+
+               return Ok(await _userRepository.GetFollowering(userId));
+        }
+        catch (Exception e)
+        {
+            return NotFound(e.Message);
+        }
+        return NoContent();
+    }
+
+
+
     [HttpPost("msgs/{username}")]
     public async Task<IActionResult> Tweet([FromRoute]string username, [FromBody]ApiSimTweet tweet, [FromQuery] int? latest)
     {
