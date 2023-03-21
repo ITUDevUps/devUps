@@ -5,10 +5,11 @@
     border-radius: 5px;
     padding: 10px 20px;
     cursor: pointer;
-    margin: 10px;
+    margin: 10px 0 30px;
     font-size: 1.2rem;
     font-weight: bold;
     transition: all 0.2s ease-in-out;
+    width: 160px;
 }
 
 .button:hover {

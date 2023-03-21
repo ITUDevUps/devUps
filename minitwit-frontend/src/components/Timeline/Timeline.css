@@ -1,6 +1,7 @@
 .timeline {
     width: 100%;
-    min-width: 270px;
+    min-width: 40vw;
+    min-height: 50vh;
 }
 
 .no-message-container {
