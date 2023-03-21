@@ -10,8 +10,8 @@ function SearchBar() {
     const [users, setUsers] = useState([]);
     const [foundUsers, setFoundUsers] = useState([]);
     const [showSearch, setShowSearch] = useState(false);
+    const {REACT_APP_API_URL} = process.env;
 
-    const fetchApi = "http://207.154.228.44:3005/user/GetUsers";
 
     useEffect(() => {
         fetchUsers();
@@ -32,7 +32,7 @@ function SearchBar() {
     }
 
     const fetchUsers = () => {
-        fetch(fetchApi, {
+        fetch(`${REACT_APP_API_URL}/user/GetUsers`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             mode: "cors",

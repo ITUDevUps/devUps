@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import './Login.css';
 
 function Login() {
-
+    const {REACT_APP_API_URL} = process.env;
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        fetch("http://157.245.27.152:3005/user/login",
+        fetch(`${REACT_APP_API_URL}/user/login`,
             {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
