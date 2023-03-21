@@ -8,3 +8,10 @@
     background-color: #282c34;
     color: white;
 }
+
+.back-link {
+    color: #61dafb;
+    text-decoration-line: underline;
+    cursor: pointer;
+    font-size: 25px;
+}

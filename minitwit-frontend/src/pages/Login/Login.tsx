@@ -6,7 +6,7 @@ function Login() {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit= (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         fetch("http://157.245.27.152:3005/user/login",
