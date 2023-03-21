@@ -18,7 +18,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> RegisterUser(RegisterUserDTO user)
+    public async Task<IActionResult> RegisterUser(RegisterUserDto user)
     {
         var error = string.Empty;
         try
@@ -56,7 +56,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> LoginUser(UserLoginDTO user)
+    public async Task<IActionResult> LoginUser(UserLoginDto user)
     {
         var error = string.Empty;
         try
@@ -96,20 +96,20 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("GetUsers")]
-    public async Task<ActionResult<List<UserDTO>>> GetUsers()
+    public async Task<ActionResult<List<UserDto>>> GetUsers()
     {
         return await _userRepository.GetUsersAsync();
     }
 
     [HttpPost("Follow")]
-    public async Task<IActionResult> Follow(FollowDTO followDto)
+    public async Task<IActionResult> Follow(FollowDto followDto)
     {
         await _userRepository.Follow(followDto.FromId, followDto.ToId);
         return Ok();
     }
 
     [HttpPost("UnFollow")]
-    public async Task<IActionResult> UnFollow(FollowDTO unFollowDto)
+    public async Task<IActionResult> UnFollow(FollowDto unFollowDto)
     {
         await _userRepository.UnFollow(unFollowDto.FromId, unFollowDto.ToId);
         return Ok();

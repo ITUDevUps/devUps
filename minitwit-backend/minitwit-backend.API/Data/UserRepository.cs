@@ -28,14 +28,14 @@ namespace minitwit_backend.Data
             return id != -1;
         }
 
-        public Task<List<UserDTO>> GetUsersAsync()
+        public Task<List<UserDto>> GetUsersAsync()
         {
             return _context.Users
                 .Join(
                     _context.Users,
                     users => users.UserId,
                     users => users.UserId,
-                    (user, user2) => new UserDTO
+                    (user, user2) => new UserDto
                     {
                         UserId = user.UserId,
                         UserName = user.Username

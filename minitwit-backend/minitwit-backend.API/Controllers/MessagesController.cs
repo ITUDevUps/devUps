@@ -15,19 +15,19 @@ public class MessagesController : ControllerBase
     }
 
     [HttpGet("GetMessages")]
-    public async Task<ActionResult<List<TwitDTO>>> GetMessages()
+    public async Task<ActionResult<List<TwitDto>>> GetMessages()
     {
         return await _repo.GetMessagesAsync();
     }
 
     [HttpGet("GetMessages/{userName}")]
-    public async Task<ActionResult<List<TwitDTO>>> GetMessagesFromUser(string userName)
+    public async Task<ActionResult<List<TwitDto>>> GetMessagesFromUser(string userName)
     {
         return await _repo.GetMessagesAsyncByUserName(userName);
     }
 
     [HttpPost("PostMessage")]
-    public async Task<ActionResult<TwitDTO>> PostMessage([FromBody] TwitDTO twit, int authorId)
+    public async Task<ActionResult<TwitDto>> PostMessage([FromBody] TwitDto twit, int authorId)
     {
         await _repo.PostMessageAsync(twit, authorId);
         return Ok();

@@ -1,7 +1,7 @@
 ﻿namespace minitwit_backend.Data.Model
 {
-    public class APISimFollowing
+    public class ApiSimFollowing
     {
-        public IEnumerable<string> follows { get; set; }
+        public IEnumerable<string> Follows { get; set; }
     }
 }

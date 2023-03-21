@@ -37,7 +37,7 @@ public class SimApiController : ControllerBase
             {
                 error = "You have to enter a valid email address";
             }
-            else if (String.IsNullOrEmpty(user.pwd))
+            else if (String.IsNullOrEmpty(user.Pwd))
             {
                 error = "You have to enter a password";
             }
@@ -134,7 +134,7 @@ public class SimApiController : ControllerBase
         {
             if (_userRepository.TryGetUserId(username, out var userid))
             {
-                await _messageRepository.PostMessageAsync(new TwitDTO
+                await _messageRepository.PostMessageAsync(new TwitDto
                 {
                     UserName = username,
                     Date = (int)DateTime.UtcNow.Ticks,

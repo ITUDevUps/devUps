@@ -1,6 +1,6 @@
 namespace minitwit_backend.Data.Model;
 
-public class UserDTO
+public class UserDto
 {
     public int UserId { get; set; }
     
