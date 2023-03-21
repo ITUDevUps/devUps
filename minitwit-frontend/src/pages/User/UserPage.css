@@ -4,4 +4,9 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    gap: 15px;
+}
+
+.user-title {
+    margin: 12px;
 }
