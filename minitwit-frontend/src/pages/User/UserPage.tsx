@@ -15,7 +15,7 @@ function UserPage() {
 	return (
 		<div className="container">
 			<h2 className="user-title">{userNameCapitalized}</h2>
-			<FollowUserButton/>
+			<FollowUserButton userName={userName as string}/>
 			<Timeline endpoint={`/GetMessages/${userName}`}/>
 		</div>
 	);
