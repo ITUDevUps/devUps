@@ -1,14 +1,12 @@
-.timeline-container {
+.timeline {
+    width: 100%;
+    min-width: 270px;
+}
+
+.no-message-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #282c34;
-    padding: 20px 0 100px;
-}
-
-.timeline {
-    width: 60%;
-    min-width: 270px;
 }
 
 .no-message-headline {

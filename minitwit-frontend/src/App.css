@@ -22,7 +22,7 @@
     text-decoration-line: underline;
 }
 
-.left-side-nav {
+.nav-links {
     display: flex;
     align-items: center;
 }
@@ -42,19 +42,3 @@
     padding: 15px;
     color: #61dafb;
 }
-
-.search-icon {
-    fill: #61dafb;
-    height: 1em;
-    cursor: pointer;
-}
-
-.search-container {
-    display: flex;
-    align-items: center;
-}
-
-.search-input {
-    height: 22px;
-}
-

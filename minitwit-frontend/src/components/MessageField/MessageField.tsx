@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import './Message-field.css';
+import './MessageField.css';
 
 type Props = { fetchMessages: () => void }
+
 function MessageField(props: Props) {
 
     const [twit, setTwit] = useState("");
