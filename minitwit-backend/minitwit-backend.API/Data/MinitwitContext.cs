@@ -49,6 +49,7 @@ public partial class MinitwitContext : DbContext
             entity.Property(e => e.AuthorId).HasColumnName("author_id");
             entity.Property(e => e.Flagged).HasColumnName("flagged");
             entity.Property(e => e.PubDate).HasColumnName("pub_date");
+            entity.Property(e => e.Date).HasColumnName("date");
             entity.Property(e => e.Text)
                 .HasColumnType("string")
                 .HasColumnName("text");

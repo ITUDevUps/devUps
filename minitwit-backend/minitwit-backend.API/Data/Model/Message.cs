@@ -8,6 +8,8 @@ public partial class Message
 
     public string Text { get; set; } = string.Empty;
 
+    public DateTime? Date { get; set; }
+
     public int? PubDate { get; set; }
 
     public int? Flagged { get; set; } = 0;

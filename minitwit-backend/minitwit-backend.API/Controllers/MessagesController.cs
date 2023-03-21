@@ -15,8 +15,13 @@ public class MessagesController : ControllerBase
     }
 
     [HttpGet("GetMessages")]
-    public async Task<ActionResult<List<TwitDTO>>> GetMessages()
+    public async Task<ActionResult<List<TwitDTO>>> GetMessages([FromQuery]DateTime? date, [FromQuery]int page = 0)
     {
+        if (date != null)
+        {
+            return await _repo.GetMessagesAsync(date.Value, page);
+        }
+
         return await _repo.GetMessagesAsync();
     }
 

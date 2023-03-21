@@ -113,7 +113,7 @@ public class SimApiController : ControllerBase
                 return NotFound(username);
             }
 
-               return Ok(await _userRepository.GetFollowering(userId));
+            return Ok(await _userRepository.GetFollowering(userId));
         }
         catch (Exception e)
         {
@@ -137,7 +137,8 @@ public class SimApiController : ControllerBase
                 await _messageRepository.PostMessageAsync(new TwitDTO
                 {
                     UserName = username,
-                    Date = (int)DateTime.UtcNow.Ticks,
+                    //Date = (int)DateTime.UtcNow.Ticks,
+                    DateTime = DateTime.UtcNow,
                     Message = tweet.Content ?? string.Empty
                 }, userid);
             }

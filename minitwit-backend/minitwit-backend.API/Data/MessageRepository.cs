@@ -26,6 +26,27 @@ namespace minitwit_backend.Data
                     }).ToListAsync();
         }
 
+        public Task<List<TwitDTO>> GetMessagesAsync(DateTime date, int page)
+        {
+            return _context
+                .Messages
+                .OrderByDescending(x => x.Date)
+                .Where(x => x.Date <= date)
+                .Skip(page * 40)
+                .Take(40)
+                .Join(
+                    _context.Users,
+                    messages => messages.AuthorId,
+                    users => users.UserId,
+                    (message, user) => new TwitDTO
+                    {
+                        UserName = user.Username,
+                        Message = message.Text,
+                        DateTime = message.Date
+                    })
+                .ToListAsync();
+        }
+
         public Task<List<TwitDTO>> GetMessagesAsyncByUserName(string userName)
         {
             return _context.Messages
@@ -46,7 +67,6 @@ namespace minitwit_backend.Data
 
         public async Task PostMessageAsync(TwitDTO tweet, int authorId)
         {
-
             await _context.AddAsync(new Message
             {
                 AuthorId = authorId,

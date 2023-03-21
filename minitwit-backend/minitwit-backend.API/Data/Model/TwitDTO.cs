@@ -6,5 +6,6 @@
         public string Message { get; set; }
 
         public int? Date { get; set; }
+        public DateTime? DateTime { get; set; }
     }
 }
