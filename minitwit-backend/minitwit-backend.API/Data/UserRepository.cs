@@ -7,7 +7,7 @@ namespace minitwit_backend.Data
 {
     public class UserRepository : IUserRepository
     {
-        private MinitwitContext _context;
+        private readonly MinitwitContext _context;
 
         public UserRepository(MinitwitContext context)
         {

@@ -5,7 +5,7 @@ namespace minitwit_backend.Data
 {
     public class MessageRepository : IMessageRepository
     {
-        private MinitwitContext _context;
+        private readonly MinitwitContext _context;
 
         public MessageRepository(MinitwitContext context) { 
             _context = context;

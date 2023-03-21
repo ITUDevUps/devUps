@@ -101,5 +101,17 @@ public class UserController : ControllerBase
         return await _userRepository.GetUsersAsync();
     }
 
+    [HttpPost("Follow")]
+    public async Task<IActionResult> Follow(FollowDTO followDto)
+    {
+        await _userRepository.Follow(followDto.FromId, followDto.ToId);
+        return Ok();
+    }
 
+    [HttpPost("UnFollow")]
+    public async Task<IActionResult> UnFollow(FollowDTO unFollowDto)
+    {
+        await _userRepository.UnFollow(unFollowDto.FromId, unFollowDto.ToId);
+        return Ok();
+    }
 }
