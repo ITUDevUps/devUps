@@ -70,7 +70,7 @@ function Timeline({ endpoint } : TimelineProps) {
                 ) : (
                     <div className="no-message-container">
                         <p className="no-message-headline">No messages</p>
-                        <p>Maybe there is an error... or maybe you don't have friends</p>
+                        <p>Maybe there is an error... Maybe it's Illuminati</p>
                     </div>
                 )}
         </div>

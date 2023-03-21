@@ -8,7 +8,7 @@ function Message(props: IMessage) {
             <>
                 <img className="avatar" src={props.image} alt={"profile"}/>
 
-                <a className="username" href={props.userName}>
+                <a className="username" href={`/user/${props.userName}`}>
                     {props.userName}
                 </a>
                 <p className="message">
