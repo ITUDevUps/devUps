@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using minitwit_backend.Data.Model;
+using System.Configuration;
+using Microsoft.Extensions.Configuration;
 using System.IO;
 
 namespace minitwit_backend.Data;
@@ -13,6 +16,7 @@ public partial class MinitwitContext : DbContext
     public MinitwitContext(DbContextOptions<MinitwitContext> options)
         : base(options)
     {
+
     }
 
     public virtual DbSet<Message> Messages { get; set; }
@@ -21,7 +25,18 @@ public partial class MinitwitContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        string projectPath = AppDomain.CurrentDomain.BaseDirectory.Split(new String[] { @"bin\" }, StringSplitOptions.None)[0];
+        IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(projectPath)
+            .AddJsonFile("appsettings.json")
+            .Build();
+
         if (!optionsBuilder.IsConfigured) {
+            string connectionString = configuration.GetConnectionString("DefaultConnection");
+
+            optionsBuilder.UseNpgsql(connectionString);
+
+            /*
             if (File.Exists("../databasefile/minitwit.db"))
             {
                 optionsBuilder.UseSqlite("Data Source=../databasefile/minitwit.db");
@@ -33,14 +48,16 @@ public partial class MinitwitContext : DbContext
             else {
                 optionsBuilder.UseSqlite("Data Source=../../databasefile/minitwit.db");
             }
+            */
 
         }
-            
+
+        base.OnConfiguring(optionsBuilder);
+
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
         modelBuilder.Entity<Message>(entity =>
         {
             entity.ToTable("message");
@@ -50,7 +67,6 @@ public partial class MinitwitContext : DbContext
             entity.Property(e => e.Flagged).HasColumnName("flagged");
             entity.Property(e => e.PubDate).HasColumnName("pub_date");
             entity.Property(e => e.Text)
-                .HasColumnType("string")
                 .HasColumnName("text");
         });
 
@@ -60,13 +76,10 @@ public partial class MinitwitContext : DbContext
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.Email)
-                .HasColumnType("string")
                 .HasColumnName("email");
             entity.Property(e => e.PwHash)
-                .HasColumnType("string")
                 .HasColumnName("pw_hash");
             entity.Property(e => e.Username)
-                .HasColumnType("string")
                 .HasColumnName("username");
             entity.HasMany(e => e.Following).WithMany(e => e.Followers);
         });

@@ -4,29 +4,34 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using minitwit_backend.Data;
 
 #nullable disable
 
-namespace minitwitbackend.Migrations
+namespace minitwit_backend.Migrations
 {
     [DbContext(typeof(MinitwitContext))]
-    [Migration("20230225181622_Initial")]
+    [Migration("20230322012634_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("UserUser", b =>
                 {
                     b.Property<int>("FollowersUserId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<int>("FollowingUserId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("FollowersUserId", "FollowingUserId");
 
@@ -39,24 +44,26 @@ namespace minitwitbackend.Migrations
                 {
                     b.Property<int>("MessageId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("integer")
                         .HasColumnName("message_id");
 
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("MessageId"));
+
                     b.Property<int>("AuthorId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("integer")
                         .HasColumnName("author_id");
 
                     b.Property<int?>("Flagged")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("integer")
                         .HasColumnName("flagged");
 
                     b.Property<int?>("PubDate")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("integer")
                         .HasColumnName("pub_date");
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("string")
+                        .HasColumnType("text")
                         .HasColumnName("text");
 
                     b.HasKey("MessageId");
@@ -68,22 +75,24 @@ namespace minitwitbackend.Migrations
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("integer")
                         .HasColumnName("user_id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserId"));
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("string")
+                        .HasColumnType("text")
                         .HasColumnName("email");
 
                     b.Property<string>("PwHash")
                         .IsRequired()
-                        .HasColumnType("string")
+                        .HasColumnType("text")
                         .HasColumnName("pw_hash");
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("string")
+                        .HasColumnType("text")
                         .HasColumnName("username");
 
                     b.HasKey("UserId");
