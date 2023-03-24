@@ -5,14 +5,17 @@ type Props = { fetchMessages: () => void }
 
 function MessageField(props: Props) {
 
+    const weNeedAUserId = 666;
+    const weNeedAUserName = "Shamal";
+
     const [twit, setTwit] = useState("");
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        fetch("http://157.245.27.152:3005/postMessage", {
+        fetch(`http://157.245.27.152:3005/postMessage/${weNeedAUserId}`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             mode: "cors",
-            body: JSON.stringify({message: twit})
+            body: JSON.stringify({userName: weNeedAUserName, message: twit, date: new Date()})
         })
             .then((response) => response.json())
             .then(() => {
