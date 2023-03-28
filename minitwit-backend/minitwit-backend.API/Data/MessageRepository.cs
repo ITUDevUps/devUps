@@ -46,8 +46,7 @@ namespace minitwit_backend.Data
 
         public async Task PostMessageAsync(TwitDTO tweet, int authorId)
         {
-
-            await _context.AddAsync(new Message
+            _context.Add(new Message
             {
                 AuthorId = authorId,
                 PubDate = tweet.Date,
