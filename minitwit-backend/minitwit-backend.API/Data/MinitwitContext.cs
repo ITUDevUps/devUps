@@ -32,25 +32,39 @@ public partial class MinitwitContext : DbContext
             .Build();
 
         if (!optionsBuilder.IsConfigured) {
-            string connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            optionsBuilder.UseNpgsql(connectionString);
-
-            /*
-            if (File.Exists("../databasefile/minitwit.db"))
+            if (File.Exists("../databasefile/connectionString.txt"))
             {
-                optionsBuilder.UseSqlite("Data Source=../databasefile/minitwit.db");
+                StreamReader readingFile = new StreamReader("../databasefile/connectionString.txt");
+                string connectionString = readingFile.ReadLine();
+                optionsBuilder.UseNpgsql(connectionString);
             }
-            else if (File.Exists("../../databasefile/minitwit.db"))
+            else if (File.Exists("../../databasefile/connectionString.txt"))
             {
-                optionsBuilder.UseSqlite("Data Source=../../databasefile/minitwit.db");
+                StreamReader readingFile = new StreamReader("../../databasefile/connectionString.txt");
+                string connectionString = readingFile.ReadLine();
+                optionsBuilder.UseNpgsql(connectionString);
+
             }
             else {
-                optionsBuilder.UseSqlite("Data Source=../../databasefile/minitwit.db");
+                throw new Exception("Please put a connection string in a txt file called connectionString.txt in a folder called databasefile");
             }
-            */
 
-        }
+                /*
+                if (File.Exists("../databasefile/minitwit.db"))
+                {
+                    optionsBuilder.UseSqlite("Data Source=../databasefile/minitwit.db");
+                }
+                else if (File.Exists("../../databasefile/minitwit.db"))
+                {
+                    optionsBuilder.UseSqlite("Data Source=../../databasefile/minitwit.db");
+                }
+                else {
+                    optionsBuilder.UseSqlite("Data Source=../../databasefile/minitwit.db");
+                }
+                */
+
+            }
 
         base.OnConfiguring(optionsBuilder);
 
