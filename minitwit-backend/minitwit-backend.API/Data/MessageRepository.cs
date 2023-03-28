@@ -3,7 +3,7 @@ using minitwit_backend.Data.Model;
 
 namespace minitwit_backend.Data
 {
-    public class MessageRepository : IMessageRepository
+    sealed class MessageRepository : IMessageRepository
     {
         private MinitwitContext _context;
 

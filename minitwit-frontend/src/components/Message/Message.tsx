@@ -1,12 +1,6 @@
 import React from 'react';
 import "./Message.css";
-
-export interface IMessage {
-    image: string;
-    userName: string;
-    message: string;
-    date: string;
-}
+import {IMessage} from "../../Util/Types";
 
 function Message(props: IMessage) {
     return (
@@ -18,11 +12,11 @@ function Message(props: IMessage) {
                     {props.userName}
                 </a>
                 <p className="message">
-                {props.message}
+                    {props.message}
                 </p>
                 <p className="date">
                     <>
-                &mdash; {props.date}
+                        &mdash; {props.date}
                     </>
                 </p>
             </>

@@ -1,12 +1,9 @@
 import React from 'react';
 import './App.css';
 import {Link, Outlet} from "react-router-dom";
-import {ReactComponent as SearchIcon} from "./assets/icons/search-icon.svg";
+import SearchBar from "./components/SearchField/SearchBar";
 
 function App() {
-
-    const [searchQuery, setSearchQuery] = React.useState("");
-    const [searchbarActive, setSearchbarActive] = React.useState(false);
 
     const logout = () => {
         localStorage.removeItem("token");
@@ -17,13 +14,9 @@ function App() {
         <div className="App">
             <header className="App-header">
                 <div className="navigation">
-                    <div className="left-side-nav">
+                    <div className="nav-links">
                         <Link className="nav-link" to="/">Timeline</Link>
-                        <SearchIcon className="search-icon" onClick={() => setSearchbarActive(!searchbarActive)}/>
-                        {searchbarActive && (
-                            <input className="search-input" type="text" placeholder="Search..." value={searchQuery}
-                                   onChange={e => setSearchQuery(e.target.value)}/>
-                        )}
+                        <SearchBar/>
                     </div>
                     {(localStorage.getItem("token") === null) && (
                         <div>
@@ -32,9 +25,12 @@ function App() {
                         </div>
                     )}
                     {(localStorage.getItem("token") !== null) && (
-                        <div>
-                            <p className="nav-link logout-button" onClick={logout}>Logout</p>
-                        </div>
+                        <>
+                            <div className="nav-links">
+                                <Link className="nav-link" to="/user/">Profile</Link>
+                                <p className="nav-link logout-button" onClick={logout}>Logout</p>
+                            </div>
+                        </>
                     )}
                 </div>
                 <h1>MiniTwit</h1>
