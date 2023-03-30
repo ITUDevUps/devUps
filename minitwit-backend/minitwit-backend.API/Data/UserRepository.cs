@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 using minitwit_backend.Data.Model;
 
 namespace minitwit_backend.Data
@@ -176,12 +176,6 @@ namespace minitwit_backend.Data
             var hashToCompare = Rfc2898DeriveBytes.Pbkdf2(password, salt, iterations, hashAlgorithm, keySize);
             return hashToCompare.SequenceEqual(Convert.FromHexString(hash));
         }
-
-
-
-
-
-
 
         public void Dispose()
         {

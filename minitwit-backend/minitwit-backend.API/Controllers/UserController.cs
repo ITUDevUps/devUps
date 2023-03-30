@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using minitwit_backend.Data;
 using minitwit_backend.Data.Model;
-using System.Reflection.Metadata.Ecma335;
 
 namespace minitwit_backend.Controllers;
 
@@ -100,6 +99,20 @@ public class UserController : ControllerBase
     {
         return await _userRepository.GetUsersAsync();
     }
-
-
+    
+    [HttpPost("Follow")]
+    public async Task<IActionResult> Follow(int fromId, int toId)
+    {
+        await _userRepository.Follow(fromId, toId);
+        return Ok();
+    }
+    
+    [HttpPost("UnFollow")]
+    public async Task<IActionResult> UnFollow(int fromId, int toId)
+    {
+        await _userRepository.UnFollow(fromId, toId);
+        return Ok();
+    }
+    
+    
 }
