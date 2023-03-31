@@ -54,7 +54,7 @@ namespace minitwit_backend.Data
             await _context.SaveChangesAsync();
         }
 
-        public async Task<UserDTO> VerifyLogin(UserLoginDTO userLoginDTO)
+        public async Task<UserDTO?> VerifyLogin(UserLoginDTO userLoginDTO)
         {
             var userFromDatabase = await _context.Users.FirstOrDefaultAsync<User>(u => u.Username == userLoginDTO.UserName);
 

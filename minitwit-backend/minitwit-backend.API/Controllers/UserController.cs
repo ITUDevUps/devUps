@@ -71,7 +71,7 @@ public class UserController : ControllerBase
             else
             {
                 var verifiedUser = await _userRepository.VerifyLogin(user);
-                if (!verifiedUser.Equals(null))
+                if (verifiedUser != null)
                 {
                     return Ok(verifiedUser);
                 }
