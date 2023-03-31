@@ -826,3 +826,5 @@ sketch
 /minitwit-frontend/.idea/workspace.xml
 /minitwit-frontend/.idea/inspectionProfiles/
 /.vagrant
+
+/databasefile/
