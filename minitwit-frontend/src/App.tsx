@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Link, Outlet} from "react-router-dom";
 import SearchBar from "./components/SearchField/SearchBar";
+import {UserContext} from "./Util/Contexts/UserContext";
+import {User} from "./Util/Types";
 
 function App() {
+
+	const [user, setUser] = useState<User | null>(null);
 
 	const logout = () => {
 		localStorage.removeItem("token");
@@ -37,7 +41,9 @@ function App() {
 					)}
 				</div>
 				<div className="App-content">
-					<Outlet/>
+					<UserContext.Provider value={{user, setUser}}>
+						<Outlet/>
+					</UserContext.Provider>
 				</div>
 			</header>
 			<footer className="App-footer">

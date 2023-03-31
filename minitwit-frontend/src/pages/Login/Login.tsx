@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import './Login.css';
+import {UserContext} from "../../Util/Contexts/UserContext";
 
 function Login() {
 
+    const {setUser} = useContext(UserContext)
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
@@ -17,9 +19,10 @@ function Login() {
                 body: JSON.stringify({username: userName, password})
             }).then(res => res.json())
             .then((res) => {
-                if(res.message !== -1) {
+                if (res.message !== null) {
                     window.location.href = "/";
                     localStorage.setItem("token", "coolToken");
+                    setUser!(res);
                 } else {
                     alert(res.message);
                 }
