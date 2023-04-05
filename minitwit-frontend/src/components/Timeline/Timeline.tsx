@@ -25,7 +25,7 @@ function Timeline({ endpoint } : TimelineProps) {
 
     const fetchMessages = () => {
         setLoading(true);
-        fetch(`${REACT_APP_API_URL}${endpoint}`, {
+        fetch(`${REACT_APP_API_URL}/${endpoint}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             mode: "cors",
