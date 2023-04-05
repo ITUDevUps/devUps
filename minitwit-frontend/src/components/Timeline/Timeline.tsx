@@ -19,10 +19,6 @@ function Timeline({ endpoint } : TimelineProps) {
     const totalPages = Math.ceil(messages.length / messagesPerPage);
 
     useEffect(() => {
-        fetchMessages();
-    }, [])
-
-    const fetchMessages = () => {
         setLoading(true);
         fetch(`${fetchApi}${endpoint}`, {
             method: "GET",
@@ -34,7 +30,7 @@ function Timeline({ endpoint } : TimelineProps) {
                 setMessages(json);
                 setLoading(false);
             })
-    }
+    }, [endpoint])
 
     const renderMessages = () => {
         const indexOfLastMessage = activePage * messagesPerPage;

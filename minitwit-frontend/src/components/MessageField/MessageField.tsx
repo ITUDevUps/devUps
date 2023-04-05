@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import './MessageField.css';
 
-type Props = { fetchMessages: () => void }
-
-function MessageField(props: Props) {
+function MessageField() {
 
     const [twit, setTwit] = useState("");
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -17,7 +15,6 @@ function MessageField(props: Props) {
             .then((response) => response.json())
             .then(() => {
                 setTwit("");
-                props.fetchMessages();
             })
     }
 
