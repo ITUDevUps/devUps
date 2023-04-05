@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 using minitwit_backend.Data.Model;
 
 namespace minitwit_backend.Data
 {
-    public class UserRepository : IUserRepository
+    sealed class UserRepository : IUserRepository
     {
         private MinitwitContext _context;
 
@@ -103,7 +103,7 @@ namespace minitwit_backend.Data
 
             if (user == null || otherUser == null)
             {
-                throw new ArgumentException();
+                throw new ArgumentException("user following or user to be followed can not be null");
             }
 
             if (user.Following.Contains(otherUser) || otherUser.Followers.Contains(user))
@@ -132,7 +132,7 @@ namespace minitwit_backend.Data
 
             if (user == null || otherUser == null)
             {
-                throw new ArgumentException();
+                throw new ArgumentException("user following or user to be followed can not be null");
             }
 
             if (!user.Following.Contains(otherUser) || !otherUser.Followers.Contains(user))
@@ -176,12 +176,6 @@ namespace minitwit_backend.Data
             var hashToCompare = Rfc2898DeriveBytes.Pbkdf2(password, salt, iterations, hashAlgorithm, keySize);
             return hashToCompare.SequenceEqual(Convert.FromHexString(hash));
         }
-
-
-
-
-
-
 
         public void Dispose()
         {

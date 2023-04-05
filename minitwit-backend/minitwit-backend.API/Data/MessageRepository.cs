@@ -3,7 +3,7 @@ using minitwit_backend.Data.Model;
 
 namespace minitwit_backend.Data
 {
-    public class MessageRepository : IMessageRepository
+    sealed class MessageRepository : IMessageRepository
     {
         private MinitwitContext _context;
 
@@ -46,8 +46,7 @@ namespace minitwit_backend.Data
 
         public async Task PostMessageAsync(TwitDTO tweet, int authorId)
         {
-
-            await _context.AddAsync(new Message
+            _context.Add(new Message
             {
                 AuthorId = authorId,
                 PubDate = tweet.Date,
