@@ -4,10 +4,9 @@ import MessageField from "../../components/MessageField/MessageField";
 import Timeline from "../../components/Timeline/Timeline";
 
 function TimelinePage() {
-
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
-    const fetchApi = "http://207.154.228.44:3005";
+    const {REACT_APP_API_URL} = process.env;
 
     useEffect(() => {
         //fetchMessages();
@@ -15,7 +14,7 @@ function TimelinePage() {
 
     const fetchMessages = () => {
         setLoading(true);
-        fetch(`${fetchApi}/getMessages`, {
+        fetch(`${REACT_APP_API_URL}/getMessages`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             mode: "cors",
@@ -33,7 +32,7 @@ function TimelinePage() {
             {(localStorage.getItem("token") !== null) && (
                 <MessageField fetchMessages={fetchMessages}/>
             )}
-            <Timeline endpoint="/GetMessages" />
+            <Timeline endpoint="GetMessages/"/>
         </div>
     );
 }

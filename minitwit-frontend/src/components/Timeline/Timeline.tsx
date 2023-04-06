@@ -9,11 +9,12 @@ export interface TimelineProps {
     endpoint: string;
 }
 
+
 function Timeline({ endpoint } : TimelineProps) {
 
     const [loading, setLoading] = useState(false);
     const [messages, setMessages] = useState([]);
-    const fetchApi = "http://207.154.228.44:3005";
+    const {REACT_APP_API_URL} = process.env;
     const [activePage, setActivePage] = useState(1);
     const [messagesPerPage] = useState(40);
     const totalPages = Math.ceil(messages.length / messagesPerPage);
@@ -24,7 +25,7 @@ function Timeline({ endpoint } : TimelineProps) {
 
     const fetchMessages = () => {
         setLoading(true);
-        fetch(`${fetchApi}${endpoint}`, {
+        fetch(`${REACT_APP_API_URL}/${endpoint}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             mode: "cors",
