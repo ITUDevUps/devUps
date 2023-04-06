@@ -54,7 +54,7 @@ namespace minitwit_backend.Data
             await _context.SaveChangesAsync();
         }
 
-        public async Task<int> VerifyLogin(UserLoginDTO userLoginDTO)
+        public async Task<UserDTO?> VerifyLogin(UserLoginDTO userLoginDTO)
         {
             var userFromDatabase = await _context.Users.FirstOrDefaultAsync<User>(u => u.Username == userLoginDTO.UserName);
 
@@ -64,14 +64,18 @@ namespace minitwit_backend.Data
                 var hash = userFromDatabase.PwHash.Split(":")[1];
                 if (VerifyPassword(userLoginDTO.Password, hash, Convert.FromHexString(salt)))
                 {
-                    return userFromDatabase.UserId;
+                    return new UserDTO
+                    {
+                        UserId = userFromDatabase.UserId,
+                        UserName = userFromDatabase.Username
+                    };
                 }
                 else
                 {
-                    return -1;
+                    return null;
                 };
             }
-            return -1;
+            return null;
         }
 
 
@@ -181,7 +185,5 @@ namespace minitwit_backend.Data
         {
             _context.Dispose();
         }
-
-
     }
 }
