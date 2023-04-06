@@ -57,7 +57,7 @@ public class UserController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> LoginUser(UserLoginDTO user)
     {
-        var error = string.Empty;
+        string error;
         try
         {
             if (String.IsNullOrEmpty(user.UserName))
@@ -70,10 +70,10 @@ public class UserController : ControllerBase
             }
             else
             {
-                var userId = await _userRepository.VerifyLogin(user);
-                if (userId != -1)
+                var verifiedUser = await _userRepository.VerifyLogin(user);
+                if (verifiedUser != null)
                 {
-                    return Ok(userId);
+                    return Ok(verifiedUser);
                 }
                 else
                 {
