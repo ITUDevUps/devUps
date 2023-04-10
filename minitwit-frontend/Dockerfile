@@ -16,7 +16,6 @@ RUN npm install --silent
 
 # Copy the rest of the application code to the container
 COPY . ./
-COPY requirements.txt ./
 
 RUN apk add --update py3-pip
 RUN pip install --no-cache-dir -r requirements.txt
