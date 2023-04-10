@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using minitwit_backend.Data;
 using minitwit_backend.Data.Model;
-using System.Reflection.Metadata.Ecma335;
 
 namespace minitwit_backend.Controllers;
 
@@ -58,7 +57,7 @@ public class UserController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> LoginUser(UserLoginDTO user)
     {
-        var error = string.Empty;
+        string error;
         try
         {
             if (String.IsNullOrEmpty(user.UserName))
@@ -71,10 +70,10 @@ public class UserController : ControllerBase
             }
             else
             {
-                var userId = await _userRepository.VerifyLogin(user);
-                if (userId != -1)
+                var verifiedUser = await _userRepository.VerifyLogin(user);
+                if (verifiedUser != null)
                 {
-                    return Ok(userId);
+                    return Ok(verifiedUser);
                 }
                 else
                 {
@@ -100,6 +99,20 @@ public class UserController : ControllerBase
     {
         return await _userRepository.GetUsersAsync();
     }
-
-
+    
+    [HttpPost("Follow")]
+    public async Task<IActionResult> Follow(int fromId, int toId)
+    {
+        await _userRepository.Follow(fromId, toId);
+        return Ok();
+    }
+    
+    [HttpPost("UnFollow")]
+    public async Task<IActionResult> UnFollow(int fromId, int toId)
+    {
+        await _userRepository.UnFollow(fromId, toId);
+        return Ok();
+    }
+    
+    
 }
