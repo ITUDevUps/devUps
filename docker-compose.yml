@@ -12,6 +12,8 @@ services:
       - ASPNETCORE_HTTP_PORT=https://+:3006
       - ASPNETCORE_URLS=http://+:3005
       - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - kibana
     volumes:
       - type: bind
         source: ./databasefile
