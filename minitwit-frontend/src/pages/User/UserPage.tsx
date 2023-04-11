@@ -11,7 +11,7 @@ function UserPage() {
         <div className="container">
             <h1>{userName}</h1>
 
-            <Timeline endpoint={`/GetMessages/${userName}`}/>
+            <Timeline endpoint={`GetMessages/${userName}`}/>
         </div>
     );
 }

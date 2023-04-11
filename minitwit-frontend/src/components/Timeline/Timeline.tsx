@@ -9,22 +9,19 @@ export interface TimelineProps {
     endpoint: string;
 }
 
+
 function Timeline({ endpoint } : TimelineProps) {
 
     const [loading, setLoading] = useState(false);
     const [messages, setMessages] = useState([]);
-    const fetchApi = "http://207.154.228.44:3005";
+    const {REACT_APP_API_URL} = process.env;
     const [activePage, setActivePage] = useState(1);
     const [messagesPerPage] = useState(40);
     const totalPages = Math.ceil(messages.length / messagesPerPage);
 
     useEffect(() => {
-        fetchMessages();
-    }, [])
-
-    const fetchMessages = () => {
         setLoading(true);
-        fetch(`${fetchApi}${endpoint}`, {
+        fetch(`${REACT_APP_API_URL}/${endpoint}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             mode: "cors",
@@ -34,7 +31,7 @@ function Timeline({ endpoint } : TimelineProps) {
                 setMessages(json);
                 setLoading(false);
             })
-    }
+    }, [endpoint])
 
     const renderMessages = () => {
         const indexOfLastMessage = activePage * messagesPerPage;
