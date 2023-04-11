@@ -33,17 +33,21 @@ public partial class MinitwitContext : DbContext
                 StreamReader readingFile = new StreamReader("../databasefile/connectionString.txt");
                 string connectionString = readingFile.ReadLine();
                 optionsBuilder.UseNpgsql(connectionString);
+                readingFile.Dispose();
             }
             else if (File.Exists("../../databasefile/connectionString.txt"))
             {
                 StreamReader readingFile = new StreamReader("../../databasefile/connectionString.txt");
                 string connectionString = readingFile.ReadLine();
                 optionsBuilder.UseNpgsql(connectionString);
+                readingFile.Dispose();
 
             }
             else {
                 throw new Exception("Please put a connection string in a txt file called connectionString.txt in a folder called databasefile");
             }
+
+            
 
                 /*
                 if (File.Exists("../databasefile/minitwit.db"))
