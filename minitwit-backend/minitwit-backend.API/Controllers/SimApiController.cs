@@ -11,20 +11,24 @@ public class SimApiController : ControllerBase
 
     private readonly IMessageRepository _messageRepository;
     private readonly IUserRepository _userRepository;
-   
+    private readonly ILogger<SimApiController> _logger;
+
 
     private static int _latest = 0;
 
-    public SimApiController(IUserRepository userRepository, IMessageRepository messageRepository)
+    public SimApiController(IUserRepository userRepository, IMessageRepository messageRepository, ILogger<SimApiController> logger)
     {
         _userRepository = userRepository;
         _messageRepository = messageRepository;
+        _logger = logger;
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> RegisterUser([FromBody]ApiSimUser user, [FromQuery] int? latest)
     {
         UpdateLatest(latest);
+
+        _logger.LogInformation("SimAPI Register User", DateTime.UtcNow);
 
         var error = string.Empty;
         try
@@ -54,10 +58,13 @@ public class SimApiController : ControllerBase
         catch (Exception e)
         {
             error = e.Message;
+            _logger.LogError(error);
         }
         if (error != string.Empty)
         {
+            _logger.LogError(error);
             return BadRequest(error);
+
         }
 
         return NoContent();
