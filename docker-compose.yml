@@ -12,16 +12,18 @@ services:
       - ASPNETCORE_HTTP_PORT=https://+:3006
       - ASPNETCORE_URLS=http://+:3005
       - ASPNETCORE_ENVIRONMENT=Development
-    depends_on:
-      - kibana
     volumes:
       - type: bind
         source: ./databasefile
         target: /databasefile
+    networks:
+      - elastic
   minitwitfrontend:
     build: ./minitwit-frontend
     ports:
       - 3000:3000
+    networks:
+      - elastic
 
   elasticsearch:
     container_name: elasticsearch
@@ -31,10 +33,9 @@ services:
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
     environment:
-      - xpack.monitoring.enabled=true
-      - xpack.watcher.enabled=false
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - discovery.type=single-node
+        - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+        - "discovery.type=single-node"
+        - "xpack.security.enabled=false"
     networks:
       - elastic
 
@@ -47,6 +48,8 @@ services:
       - elasticsearch
     environment:
       - ELASTICSEARCH_URL=http://localhost:9200
+      - "elasticsearch.hosts='[\"http://elasticsearch:9200\"]'"
+      - "xpack.security.enabled=false"
     networks:
       - elastic
 
