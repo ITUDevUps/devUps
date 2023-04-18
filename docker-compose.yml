@@ -46,17 +46,19 @@ services:
           - ./prometheus.yml:/etc/prometheus/prometheus.yml
           - prometheus-storage:/prometheus
       ports:
-          - "9090:9090"
+          - 9090:9090
       networks:
           - main
 
   grafana:
       image: grafana/grafana:latest
       container_name: grafana
+      environment:
+        GF_SERVER_HTTP_PORT: 9099
       volumes:
         - ./grafana-storage:/var/lib/grafana
       ports:
-          - "9099:3000"
+          - 9099:9099
       networks:
           - main
       depends_on:
