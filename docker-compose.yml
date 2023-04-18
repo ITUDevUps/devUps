@@ -18,7 +18,7 @@ services:
         source: ./databasefile
         target: /databasefile
     networks:
-        - main
+        - itu-minitwit-network
     depends_on:
         - grafana
         - prometheus
@@ -30,7 +30,7 @@ services:
     ports:
       - 3000:3000
     networks:
-        - main
+        - itu-minitwit-network
     depends_on:
         - minitwitbackend
         - prometheus
@@ -45,7 +45,7 @@ services:
       ports:
           - 9090:9090
       networks:
-          - main
+          - itu-minitwit-network
 
   grafana:
       image: grafana/grafana:latest
@@ -57,10 +57,10 @@ services:
       ports:
           - 9099:9099
       networks:
-          - main
+          - itu-minitwit-network
       depends_on:
           - prometheus
-          - 
+
   elasticsearch:
     container_name: elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:8.7.0

@@ -18,4 +18,4 @@ scrape_configs:
   - job_name: 'minitwit'
     scrape_interval: 5s
     static_configs:
-      - targets: [ 'minitwit:3005' ]
+      - targets: [ 'minitwitbackend:3005' ]
