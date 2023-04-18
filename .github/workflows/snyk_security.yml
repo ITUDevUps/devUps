@@ -2,7 +2,7 @@ name: Snyk security workflow
 on: push
 jobs:
   security:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - name: Run Snyk to check for vulnerabilities
