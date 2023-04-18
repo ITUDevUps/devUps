@@ -11,7 +11,7 @@ public static partial class MiddlewareController
             builder.AllowAnyOrigin();
         });
 
-        app.UseHttpsRedirection(); 
+        //app.UseHttpsRedirection(); 
         //app.UseSwagger();
         //app.UseSwaggerUI();
         app.MapControllers();

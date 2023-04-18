@@ -21,6 +21,7 @@ var configuration = new ConfigurationBuilder()
         $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",
         optional: true)
     .Build();
+Console.WriteLine(configuration["ElasticConfiguration:Uri"]);
 
 builder.Host.UseSerilog((ctx, lc) => lc
     .Enrich.FromLogContext()
@@ -54,4 +55,7 @@ app.UseHttpMetrics();
 
 app.RegisterMapMiddleware();
 
+
+
 app.Run();
+
