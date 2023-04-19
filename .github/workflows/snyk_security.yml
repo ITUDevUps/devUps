@@ -1,11 +1,26 @@
 name: Snyk security workflow
-on: push
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 jobs:
-  security:
+  snyk-dotnet:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@master
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/dotnet@master
+      - uses: actions/checkout@main
+      - name: Run Snyk to check dotnet for vulnerabilities
+        uses: snyk/actions/dotnet@main
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+  snyk-node:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@main
+      - name: Run Snyk to check Node.js for vulnerabilities
+        uses: snyk/actions/node@main
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
