@@ -13,7 +13,6 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install --silent
 
-
 # Copy the rest of the application code to the container
 COPY . ./
 

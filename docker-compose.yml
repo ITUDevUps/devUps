@@ -5,6 +5,7 @@ version: "3.4"
 services:
   minitwitbackend:
     build: ./minitwit-backend
+    container_name: minitwit-backend
     ports:
       - 3005:3005
       - 3006:3006
@@ -17,13 +18,50 @@ services:
         source: ./databasefile
         target: /databasefile
     networks:
-      - elastic
+        - itu-minitwit-network
+        - elastic
+    depends_on:
+        - grafana
+        - prometheus
+        - kibana
+
   minitwitfrontend:
     build: ./minitwit-frontend
+    container_name: minitwit-frontend
     ports:
       - 3000:3000
     networks:
-      - elastic
+        - itu-minitwit-network
+        - elastic
+    depends_on:
+        - minitwitbackend
+        - prometheus
+        - grafana
+
+  prometheus:
+      image: prom/prometheus:latest
+      container_name: prometheus
+      volumes:
+          - ./prometheus.yml:/etc/prometheus/prometheus.yml
+          - prometheus-storage:/prometheus
+      ports:
+          - 9090:9090
+      networks:
+          - itu-minitwit-network
+
+  grafana:
+      image: grafana/grafana:latest
+      container_name: grafana
+      environment:
+        GF_SERVER_HTTP_PORT: 9099
+      volumes:
+        - ./grafana-storage:/var/lib/grafana
+      ports:
+          - 9099:9099
+      networks:
+          - itu-minitwit-network
+      depends_on:
+          - prometheus
 
   elasticsearch:
     container_name: elasticsearch
@@ -54,8 +92,11 @@ services:
       - elastic
 
 networks:
+  itu-minitwit-network:
   elastic:
     driver: bridge
 
 volumes:
   elasticsearch-data:
+  grafana-storage:
+  prometheus-storage:
