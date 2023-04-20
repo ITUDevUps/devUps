@@ -39,8 +39,8 @@ namespace minitwit_backend.Test
                 AuthorId = 1234,
                 Text = "I'm a test"
             };
-            await _dbContext.Users.AddAsync(user);
-            await _dbContext.Messages.AddAsync(msg);
+            _dbContext.Users.Add(user);
+            _dbContext.Messages.Add(msg);
             await _dbContext.SaveChangesAsync();
             return this;
         }
