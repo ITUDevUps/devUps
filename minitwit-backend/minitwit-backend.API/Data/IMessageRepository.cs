@@ -5,6 +5,7 @@ namespace minitwit_backend.Data;
 public interface IMessageRepository : IDisposable
 {
     internal Task<List<TwitDTO>> GetMessagesAsync();
+    internal Task<List<TwitDTO>> GetMessagesAsync(int date, int page);
     internal Task<List<TwitDTO>> GetMessagesAsyncByUserName(string userName);
     internal Task PostMessageAsync(TwitDTO tweet, int authorId);
 }
