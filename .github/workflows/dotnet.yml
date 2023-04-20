@@ -23,8 +23,8 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
+      run: dotnet restore -s ".\minitwit-backend\minitwit-backend.API\minitwit-backend.API.csproj" -s ".\minitwit-backend\minitwit-backend.Test\minitwit-backend.Test.csproj"
+    - name: Build 
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
