@@ -8,12 +8,6 @@ ENV ASPNETCORE_HTTP_PORT=https://*:3006
 ENV ASPNETCORE_URLS=http://*:3005
 COPY . .
 
-#RUN set -xe \
-#    && apt-get update -y \
-#    && apt-get install -y python3-pip
-#RUN pip install --no-cache-dir -r requirements.txt
-
-
 WORKDIR "/src/."
 RUN dotnet restore "minitwit-backend.API\minitwit-backend.API.csproj" 
 RUN dotnet build "minitwit-backend.API\minitwit-backend.API.csproj" -c Release -o /app
@@ -21,7 +15,6 @@ RUN dotnet build "minitwit-backend.API\minitwit-backend.API.csproj" -c Release -
 FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal
 WORKDIR /app
 COPY --from=build /app .
-
 
 EXPOSE 3005
 EXPOSE 3006
