@@ -10,7 +10,7 @@ function TimelinePage() {
 			{(localStorage.getItem("token") !== null) && (
 				<MessageField/>
 			)}
-			<Timeline endpoint="/GetMessages"/>
+			<Timeline endpoint="GetMessages"/>
 		</div>
 	);
 }
