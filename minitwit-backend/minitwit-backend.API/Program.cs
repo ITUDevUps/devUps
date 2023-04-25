@@ -11,6 +11,7 @@ using System;
 using System.Reflection;
 using Serilog.Exceptions;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -47,15 +48,9 @@ builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 
-
 var app = builder.Build();
-
+app.RegisterMapMiddleware();
 app.UseMetricServer(3005);
 app.UseHttpMetrics();
 
-app.RegisterMapMiddleware();
-
-
-
 app.Run();
-
