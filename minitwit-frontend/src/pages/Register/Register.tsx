@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './Register.css';
 
 function Register() {
-
+	const {REACT_APP_API_URL} = process.env;
 	const [userName, setUserName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -21,7 +21,7 @@ function Register() {
 			return;
 		}
 
-		fetch("http://157.245.27.152:3005/user/register",
+		fetch(`${REACT_APP_API_URL}/user/register`,
 			{
 				method: "POST",
 				headers: {"Content-Type": "application/json"},
