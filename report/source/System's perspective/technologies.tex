@@ -1,0 +1,28 @@
+\subsection{Technologies}
+The system is developed into the following tech stack (including tools): 
+\begin{center}
+\begin{tabular}{@{$\bullet$ }ll}
+        Backend/API: & C\# ASP.NET core\\
+        Frontend: & React (with TypeScript) \\
+        Data Abstraction Layer: & Entity Framework Core (EFCore)\\
+        Database: & PostgreSQL database \\
+        Version Control: & GitHub \\
+        Hosting: & DigitalOcean \\
+        Containerization: & Docker \\
+        Environment Configuration: & Vagrant \\
+        Logging: & ElasticSearch, Serilog \& Kibana \\
+        Monitoring: & Prometheus \& Grafana \\
+        Code Quality: & SonarCloud \& Code Climate\\
+        Security: & Snyk \\
+\end{tabular}
+\end{center}
+
+C\# ASP.NET Core was the choice of API backend as an experiment for the group to use the native ASP.NET Core package for the first time. It has thorough documentation and resources online, making it a solid start when taking the legacy system to the new tech stack. As this is used in workplaces and apps globally, this is also great experience with a professional package that is relevant for developers in the future.
+
+For the frontend, React with TypeScript was used. This is a common way to utilize an ASP.NET Core API, and is hugely common in the professional software engineering world. Several team members had little-to-no experience with React and would have a good learning experience using this in a project of this size. React is for the fifth year in a row the most wanted framework according to stackoverflow\cite{developerSurvey}. It has a continuous large user base, good interoperability and high performance.
+
+EFCore was chosen as the data abstraction layer very early as it is the natural progression when setting up an ASP.NET Core project. It omits much of the database reading and writing and provides a simpler interface for the developers to write business logic and repositories for use with ASP.NET Core.
+
+When transitioning to the new tech stack at the beginning of the project, the database was not changed from SQLite. As performance on the SQLite was decreasing with the amount of users and requests rising the decision was made to change to a PostgreSQL database hosted and managed by Digital Ocean. While migrating to the new database, the group also tested out MySQL on Digital Ocean as well but data transfer was faster on the PostgreSQL database therefore it became the main database and the MySQL one was deleted.
+
+No team members had experience with the use of GitHub in a devops setting, hereunder GitHub actions. The other choice that was considered was Azure DevOps with Azure Pipelines, but a few team members had a lot of professional experience with the entire Azure suite and this made GitHub more attractive as the Version Control and platform for the CI/CD artifacts.

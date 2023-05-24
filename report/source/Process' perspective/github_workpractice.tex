@@ -1,0 +1,15 @@
+\subsection{Work practice}
+The team of \textit{DevUps: DevUps: Delivering Buggy Software Late since 2023} consists of four members, Anders Wagner, Theodor Kier, Mathias Fink and Jens Fastrup. The team has collaborated in-person, through Messenger and GitHub.
+
+The main organization on GitHub, has been integral to organize, maintain and integrate the code of the project. This includes creating issues, handle releases, tracking progress, and verifying new work with static analysis.
+
+\subsubsection{Branching strategy}
+With the MiniTwit repository on GitHub, it has been possible to adhere to a version control, where proper branching has been an essential part of the development process. At the early beginning of the development a guide on how to contribute to the project was created. This guide can be found on the GitHub repository as \textit{contributing.md}.\\
+
+The guide describes how the GitFlow workflow\cite{gitflow} have been used for development. The \textit{main} branch is the top branch from which releases are created from. The only branch that can push to main is the development branch \textit{dev}. This branch has at every new release the same state as \textit{main}, but it is this branch that team members create new branches from and push work to. Contributing work has to come from a branch that is prefixed with either a \textit{issue number} or as \textit{hotfix}. The branch name describes what it aims to solve. This ensures that team members can easily see what issue a branch is related to.
+
+The issues were posted in \textit{GitHub Project} which resembles a kanban board. This board was used to give a graphical view of the state of issues. Each issue could be marked as either \textit{New, In progress, In review or Done}. It was also possible to see which team member was assigned to which issue. 
+
+Pull requests are linked to issues in the backlog. Likewise, in the process of reviewing pull requests, there is a workflow with several static analysis tools that are implemented with GitHub Actions to guarantee a certain standard of delivered work.
+
+In order to build a proper project, convenience for discovering errors, fixing them and reviewing work is essential. In this aspect, the team has had the mindset of making commits often, in the sense where it reflects a precise, substantial change. Optimally, the team creates a release every week, that reflects a set of fixes, changes and additions. This has not been the case every week, as work in some periods has been solved in bulk, or have had prior work pending. 

@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import './MessageField.css';
 
 function MessageField() {
-
+    const {REACT_APP_API_URL} = process.env;
     const [twit, setTwit] = useState("");
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        fetch("http://157.245.27.152:3005/postMessage", {
+        fetch(`${REACT_APP_API_URL}/postMessage`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             mode: "cors",

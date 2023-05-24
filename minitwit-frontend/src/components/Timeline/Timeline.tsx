@@ -31,7 +31,7 @@ function Timeline({ endpoint } : TimelineProps) {
                 setMessages(json);
                 setLoading(false);
             })
-    }, [endpoint])
+    }, [endpoint, REACT_APP_API_URL])
 
     const renderMessages = () => {
         const indexOfLastMessage = activePage * messagesPerPage;

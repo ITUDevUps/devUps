@@ -1,0 +1,32 @@
+\subsection{Operation \& Maintenance}
+\subsubsection{CORS}
+During the early refactoring of the codebase there were issues related to retrieving data to the frontend from the API. This issue was caused by cross-origin resource sharing (CORS). CORS is used set as an HTTP header that instructs the server to state which domains other than its own, that it allows loading resources from. Due to the groups limited experience with the technologies the team had to search documentation on how to implement CORS in both the frontend and backend.
+
+In the frontend the solution was to set the \verb|mode: cors| for the fetch. In the backend it was to make the builder add CORS to its services. After the app-object was created, it was instructed with the following arguments \verb|app.UseCors(builder => builder.AllowAnyOrigin()|\\
+\verb|.AllowAnyHeader().AllowAnyMethod())|. These can be seen implemented in commit \textit{272da82e50732c8f9b4a458598456b4d27e23350} and \\\textit{584bee004b75397d181383a66b77dd3985bad23f}.
+
+This issue was difficult to find as there was a difference in how CORS worked depending on how you tested it locally or if it was deployed on the DigitalOcean server. And even if you tested it locally with or without the docker containers.
+
+\subsubsection{Logging early}
+After converting the legacy code to the new tech stack, a lot of issues came up when the simulator was posting tweets and users.\\
+This was related to an issue with asynchronous code and was very difficult to track down until logging was implemented.\\
+The fix was not trying to post everything asynchronously, but rather to just save the state of the database asynchronously.\\
+This was fixed in commit \textit{0c3a1f32b398138c9c531495643ae0d046e42fc1};
+
+Having logging earlier would have helped in solving this issue, so the issue persisted for several weeks and contributed to many features getting delayed several weeks.
+
+\subsubsection{Wrong date formatting}
+
+When refactoring from the python application to the project tech stack, there were issues finding out how to handle date times.\\
+
+The date times were saved as natural numbers in python and it was not described if it was the amount of ticks, seconds, minutes or what it was. Later in the project it was found out that it was the amount of seconds since 1970. When implementing the date time data in the C\# implementation, there was some miscommunication about the format of the data and this resulting in the format of dates being saved as a casted int of ticks, making the dates range from 1970 to 2034 when displayed in the frontend. \\
+
+The issue was not fixed and all the old wrong data was not migrated. The solution to fix the old data was to reset them (as it was mostly just simulator data) if they were outside a range of 1970 and the current date, migrating the data would be done in batches to omit straining the system too much during load hours.
+
+\subsubsection{Memory leaks at frontend}
+
+During development, memory leaks were introduced in the frontend code. One type of leaks was due to fetch-methods missing a necessary dependency in their calls. This resulted in the methods being invoked repeatedly, leading to resources constantly being fetched thus increasing the transfer size. This made the site either very slow or unusable in periods.
+
+Another memory leak was due to the frontend trying to fetch all messages at once. In the early stages of development this was not an issue, but as the simulator generated an increasing number of messages in the database, the workload of fetching these messages increased. A few weeks into the development, this workload became so big it caused a significant delay in loading the messages at the frontend. Additionally, if the frontend was tested locally, the high workload could overload the node causing it to crash.
+
+This proves the importance of an early analysis of tasks that may have a significant workload for the server as the amount of data increases. If this was done the performance of the system would have been increased and ensured that it could handle higher loads.

@@ -1,0 +1,19 @@
+\subsection{Monitoring}
+
+Monitoring of the system was done with Grafana and Prometheus.\\
+Prometheus is a "Open source systems monitoring and alarms toolkit" that was used to collect and store metrics in relation to the systems performance. \\
+Grafana is a open-source web application used for analytics and visualisation. These two solutions were used together in this project to gather data and visualise it to analyze the platform in real-time.
+
+Prometheus and Grafana was setup in each their Docker image and connected to the same Docker network as the images for backend and frontend. The backend was instructed to use Prometheus by setting the port for the backend (3005) as the metrics server of the application. 
+
+A settings file for Prometheus was created that contained various configurations. These included the scraping interval, what port Prometheus should be available on (9090) and what was the target for scraping data (minitwitbackend:3005).
+
+In Grafana's settings a new data source was added for Prometheus and the port it was running on. This data source was used for every panel created in the Dashboard. Each panel had a query in it that decided what data was shown in the panel. The dashboard consisted of five panels: CPU usage, Number of threads, failed requests, successful request, backend memory usage.
+
+Real-time CPU monitors usage to identify if there are any performance bottlenecks or needs for resource optimization.
+
+The active number of threads can be used for assessing system concurrency and identify if there are any potential issues. The same goes for the backend memory usage which can detect if there are any memory leaks or optimizations needed.\\
+Failed  request can be used to see if there are service errors in the backend, while successful requests can provide insights into the systems stability and efficiency. It is also an indication of how active users are.
+
+\subsection{Logging}
+For implementing the logging of the system, the ELK stack was added. The stack consists of Elasticsearch and logstash Kibana. To get an optimal experience of the ELK stack serilog was implemented in the C\# backend to be able to custom log the API endpoints, however this aspect was not fully utilized.

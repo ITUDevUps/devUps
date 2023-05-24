@@ -23,7 +23,7 @@ function SearchBar() {
 			.then((res) => {
 				setUsers(res);
 			})
-	});
+	}, [REACT_APP_API_URL]);
 
 	const searchUsers = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const query = e.currentTarget.value.toLowerCase();
