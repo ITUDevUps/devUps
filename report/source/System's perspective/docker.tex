@@ -1,0 +1,7 @@
+\subsection{Docker}
+%relates to "Applied strategy for scaling and load balancing."
+Docker has been a key tool for development of the project. It allowed the creation of separate images for different parts of the system, such as frontend, backend, monitoring and logging. Each Docker image encapsulated the dependencies and configurations which ensured reproducibility across environments. Team members could then work in their individual components without worrying about conflicts with other parts of the system. This simplified the development and deployment since it was easier to test each component individually.
+
+Even though Docker helped in terms of deployment and isolation, Docker Swarm was not implemented before deadline. Docker Swarm would have enabled better scalability by deploying clusters of Docker nodes. This would lead to a distributed workload while improving the availability and performance of the system when under heavy load. Each swarm would communicate with each other via the Docker API. Docker swarm makes a system scalable and resilient, ensuring high availability and auto-management. This is in part done by the Docker Swarms built-in automatic load-balancing.
+
+The aforementioned images could have been converted to separate services and then added to the initialized manager node as workers. This ensures that it is possible to scale and replicate the right services. Adding to this, the next step would have been to create back-up managers with replicated workers in case the main manager dies.
