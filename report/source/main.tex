@@ -1,0 +1,89 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{pdfpages}
+% stops indents on new lines
+\setlength\parindent{0pt}
+\setlength{\parskip}{0.5em} % afstand efter afsnit
+
+\usepackage{newclude}
+
+\usepackage[
+backend=biber,
+style=numeric,
+sorting=ynt
+]{biblatex}
+
+\addbibresource{bibliography.bib}
+
+% creates header and footer
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{13.59999pt}
+\pagestyle{fancy}
+\fancyhf{}
+\chead{}
+\lhead{ \leftmark }
+\rhead{DevOps}
+\rfoot{Page \thepage}
+
+\usepackage[hidelinks]{hyperref}
+
+\title{DevOps Project Report}
+\author{Theodor Kier, Anders Wagner, Mathias Fink & Jens Fastrup }
+\date{May 2023}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+
+        \Huge
+        \textbf{DevOps Project Report}\\
+        \Large
+        Group B - DevUps: Delivering Buggy Software Late since 2023
+        \vspace{1.0cm}
+
+        \Large
+        Authors:\\  
+        \textbf{Theodor Christian Kier, thki@itu.dk} \\
+        \textbf{Jens Fastrup, jfas@itu.dk} \\
+        \textbf{Anders Wagner, awag@itu.dk} \\
+        \textbf{Mathias Fink, matf@itu.dk} \\
+        
+        \vfill
+
+        Course code: KSDSESM1KU \\
+        IT University of Copenhagen\\
+        \today
+    \end{center}
+\end{titlepage}
+
+\input{introduction}
+\section{System's Perspective}
+\input{System's perspective/designandarchitecture}
+\input{System's perspective/technologies}
+\input{System's perspective/docker}
+\input{System's perspective/systemsstate}
+\input{System's perspective/license}
+\section{Process' Perspective}
+\input{Process' perspective/github_workpractice}
+\input{Process' perspective/cicd}
+\input{Process' perspective/monitoring and logging}
+\input{Process' perspective/riskanalysis}
+
+\section{Lessons Learned Perspective}
+\input{Lessons learned/refactoring}
+\input{Lessons learned/operationandmaintenance}
+\newpage
+\input{conclusion}
+
+\newpage
+\printbibliography
+
+\newpage
+\input{appendix}
+
+\end{document}

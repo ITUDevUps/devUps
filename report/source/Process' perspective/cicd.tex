@@ -1,0 +1,15 @@
+\subsection{CI\textbackslash{}CD}
+
+\subsubsection{Continuousdeployment.yml}
+The deployment workflow is activated once there is a push to the main branch, which happens after a successful merge. First it logs into Dockerhub which contains the images, then it builds and pushes the newest images from the main branch. After this it SSHs into the Digital Ocean droplet and runs the deploy.sh script which pulls the newest docker images and runs the docker containers
+
+
+\subsubsection{Other workflows}
+Three tools that are present in the CI-workflow on top of the continuous deployment Github Action are:
+\begin{itemize}
+    \item .Net Test-action, run C\# tests on the backend before deployment.
+    \item Snyk-Security, catch vulnerabilities in the language specific domain, before they reach production.
+    \item SonarCloud, to ensure code quality and no detectable vulnerabilities.
+\end{itemize}
+
+These are run on pull requests going to \textit{main} and \textit{dev} to help ensure the quality of code are up to the standard set by the specific workflows.

@@ -1,0 +1,8 @@
+\subsection{Security}
+\subsubsection{Automated Risk Assessment}
+A number of vulnerabilities present in MiniTwit was exposed by OWASP ZAP scanning tool. This tool is useful for penetration testing a hosted web-application for vulnerabilities and other security concerns. This practice should be repeated as the application expands with more surfaces to attack and manipulate. This tool is also complementary to some of the static analysis tools implemented in GitHub Actions. No critical issues were detected, only medium to low alerts.
+
+During maintenance, the team tried to change the \textit{X-Content-Type-Options} to \textit{nosniff}. It instructs the browser to always use the MIME-type that is declared in the Content-Type header rather than trying to determine the MIME-type based on the files content. For some reason, the web-application response header did not change, even when the appropriate measures in the middleware were taken. 
+    
+\subsubsection{Mitigation of Vulnerabilities}
+Several steps were taken to ensure the security of MiniTwit. Mainly Snyk, which is a security tool in GitHub performing static analysis in regards to corrupted dependencies. Snyk can be added as a GitHub Action, to secure pull requests. Having a mix of security tools and practices reduce the likelihood of a security breach in terms of confidentiality, integrity and availability. 

@@ -1,0 +1,16 @@
+\subsection{Design and Architecture}
+
+The group chose to convert the legacy code into a C\# ASP.NET/React project.
+
+The system has a micro-service based architecture and is implemented with the use of Docker containers. The system is deployed on a single Digital Ocean Droplet with a Digital Ocean PostgreSQL Database.
+
+A deployment diagram of the different parts can be seen in \autoref{fig:deploymentDiagram} below.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{resources/diagram.png}
+    \caption{Deployment diagram over MiniTwit.}
+    \label{fig:deploymentDiagram}
+\end{figure}
+
+As seen on the diagram there are many Docker containers running different services. All of the containers are configured to be on the same Docker network so they are visible and are able to communicate via the network.
