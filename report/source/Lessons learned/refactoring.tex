@@ -1,0 +1,13 @@
+\subsection{Evolution \& refactoring}
+
+During the start of the refactoring is was primarily focused on creating the new frontend and make the backend able to retrieve the messages from the database for the frontend, and make the backend work for the simulator. This was due to a large workload and time constraints, so tests and the database was not refactored initially.
+
+This prioritization was done based on what is more tangible. Creating the new frontend and ensuring the backend worked with the simulator were considered the "bare minimum" for the functionality and made it seem like an updated system for the users point of view. Other areas would have to be done at a later stage.
+Refactoring the whole codebase at once can be overwhelming and time-consuming. By doing an incremental approach after creating something that looked new and worked, it was possible to improve areas one at a time without disrupting the system's functionality.
+
+\subsubsection{Testing}
+Some issues related to this approach was also that some areas was not prioritized or simply not recognised at first. The date for messages was wrong for a while because it was not noticed.
+Manual testing was prioritized instead of refactoring the tests from the legacy codebase. When a new feature was developed the frontend was tested by group members simply using the new parts and look at them in a browser to check for errors. For the backend, a .NET testing-action was setup in GitHub Actions. This action would ensure that future tests related to the backend would be evaluated before being merged to \textbf{dev}. This aims to preserve the behavior of test-covered code.\newline If the project had refactored tests before the continuous development of new features fewer issues might have occurred during the development.
+
+\subsubsection{Database}
+The database migration was done a few weeks after the start of the simulator. The amount of entities (user, messages etc.) was continually increasing. The time needed for the database migration would have been less if done earlier in development. 
